@@ -37,22 +37,12 @@
 				<div class="header">假期活动安排</div>
 				<div class="section classmates">
 					<div class="subject">同学聚会</div>
-					<div class="item"><label><input type="checkbox" class="party" data-type="classmates">聚餐</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="KTV" data-type="classmates">KTV</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="travel" data-type="classmates">出游</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="shopping" data-type="classmates">逛街</label><span></span></div>
 				</div>
 				<div class="section friends">
 					<div class="subject">走亲访友</div>
-					<div class="item"><label><input type="checkbox" class="kinsman" data-type="friends">串亲戚</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="date" data-type="friends">相亲</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="blabla" data-type="friends">陪七大姑八大婶聊人生</label><span></span></div>
 				</div>
 				<div class="section own">
 					<div class="subject">自己专属</div>
-					<div class="item"><label><input type="checkbox" class="mobile" data-type="own">手机党</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="sleep" data-type="own">睡眠</label><span></span></div>
-					<div class="item"><label><input type="checkbox" class="traffic" data-type="own">春运</label><span></span></div>
 				</div>
 			</div>
 			<div class="page result">
@@ -116,7 +106,7 @@
 					$('.time').change(function(event) {
 						updateTotal();
 					});
-					// initArrangements();
+					initArrangements();
 					$('.arrangement input').click(function(event) {
 						updateTime($(event.target));
 					});
@@ -126,10 +116,12 @@
 
 				function initArrangements() {
 					$('.arrangement .section').each(function(index, el) {
-						var subject = trim($(el).attr('class').replace('section'));
+						var subject = $(el).attr('class').replace('section', '').trim();
 						if (!(subject in config)) { return; }
-						
-						var el = $(tpl.replace());
+						for (var item in config[subject]) {
+							var $item = $(tpl.replace('$subject', subject).replace('$type', item).replace('$name', config[subject][item]['name']));
+							$item.appendTo($(el));
+						}
 					});
 				}
 
@@ -143,6 +135,7 @@
 				}
 
 				function updateTime(el) {
+					if (!total) { return; }
 					var parent = el.data('type');
 					var item = {};
 					var cost = 0;
@@ -165,6 +158,7 @@
 				}
 
 				function updateAllTime() {
+					if (!total) { return; }
 					$('.item input[type=checkbox]:checked').each(function(index, el) {
 						updateTime($(el));
 					});
