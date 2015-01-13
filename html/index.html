@@ -37,20 +37,22 @@
 				<div class="header">假期活动安排</div>
 				<div class="section classmates">
 					<div class="subject">同学聚会</div>
-					<div class="item"><label><input type="checkbox" class="party">聚餐</label></div>
-					<div class="item"><label><input type="checkbox" class="KTV">KTV</label></div>
-					<div class="item"><label><input type="checkbox" class="traffic">交通</label></div>
+					<div class="item"><label><input type="checkbox" class="party" data-type="classmates">聚餐</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="KTV" data-type="classmates">KTV</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="travel" data-type="classmates">出游</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="shopping" data-type="classmates">逛街</label><span></span></div>
 				</div>
 				<div class="section friends">
 					<div class="subject">走亲访友</div>
-					<div class="item"><label><input type="checkbox" class="term">term</label></div>
-					<div class="item"><label><input type="checkbox" class="traffic">交通</label></div>
+					<div class="item"><label><input type="checkbox" class="kinsman" data-type="friends">串亲戚</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="date" data-type="friends">相亲</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="blabla" data-type="friends">陪七大姑八大婶聊人生</label><span></span></div>
 				</div>
 				<div class="section own">
 					<div class="subject">自己专属</div>
-					<div class="item"><label><input type="checkbox" class="mobile">手机党</label></div>
-					<div class="item"><label><input type="checkbox" class="sleep">睡眠</label></div>
-					<div class="item"><label><input type="checkbox" class="others">其他</label></div>
+					<div class="item"><label><input type="checkbox" class="mobile" data-type="own">手机党</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="sleep" data-type="own">睡眠</label><span></span></div>
+					<div class="item"><label><input type="checkbox" class="traffic" data-type="own">春运</label><span></span></div>
 				</div>
 			</div>
 			<div class="page result">
@@ -75,6 +77,31 @@
 		</div>
 		<script>
 			$(function(){
+				var width = 0;
+				var startX = 0;
+				var offsetX = 0;
+				var offset = 0;
+				var total = 0;
+				var config = {
+					classmates: {
+						party: {freq: 7, time: 5, name: '聚会'},
+						KTV: {freq: 7, time: 5, name: 'KTV'},
+						travel: {freq: 7, time: 12, name: '出游'},
+						shopping: {freq: 3, time: 8, name: '逛街'}
+					},
+					friends: {
+						kinsman: {freq: 2, time: 8, name: '串亲戚'},
+						date: {freq: 4, time: 12, name: '相亲'},
+						blabla: {freq: 7, time: 8, name: '陪七大姑八大婶聊人生'}
+					},
+					own: {
+						mobile: {freq: 1, time: 5, name: '手机党'},
+						sleep: {freq: 1, time: 8, name: '睡眠'},
+						traffic: {freq: 0, time: 30, name: '春运'}
+					}
+				};
+				var tpl = '<div class="item"><label><input type="checkbox" class="$type" data-type="$subject">$name</label><span></span></div>';
+
 				function init() {
 					$('.page').each(function(index, el) {
 						$(el).css('left', index+'00%');
@@ -86,65 +113,139 @@
 						formatHumanDate: function(date) {return date.monthShort + " " + date.dd + ", " + date.yyyy;},
 						dateFormat: "yyyy-MM-dd"
 					});
+					$('.time').change(function(event) {
+						updateTotal();
+					});
+					// initArrangements();
+					$('.arrangement input').click(function(event) {
+						updateTime($(event.target));
+					});
 					$('.pagewrapper').show();
+					width = $('.pagewrapper').width();
 				}
 
+				function initArrangements() {
+					$('.arrangement .section').each(function(index, el) {
+						var subject = trim($(el).attr('class').replace('section'));
+						if (!(subject in config)) { return; }
+						
+						var el = $(tpl.replace());
+					});
+				}
+
+				function updateTotal() {
+					var start = Date.parse($('#start').val()) || 0;
+					var end = Date.parse($('#end').val()) || 0;
+					if (start && end && end>=start) {
+						total = (end - start) / (24*60*60*1000) + 1;
+						$('.total').text(total);
+					}
+				}
+
+				function updateTime(el) {
+					var parent = el.data('type');
+					var item = {};
+					var cost = 0;
+					if (el.is(':checked')) {
+						try {
+							item = config[parent][el.attr('class')];
+						} catch (e) {
+							console.warn('unknown item');
+						}
+						if (item['freq']) {
+							cost = item['time'] * Math.ceil(total / item['freq']) || 0;
+						} else {
+							cost = item['time'] || 0;
+						}
+						el.parent().siblings('span').text(cost+'小时').show();
+					} else {
+						el.parent().siblings('span').text('').hide();
+					}
+					return cost;
+				}
+
+				function updateAllTime() {
+					$('.item input[type=checkbox]:checked').each(function(index, el) {
+						updateTime($(el));
+					});
+				}
+
+				function updateRemain() {
+					if (!total) { return; }
+					var cost = 0;
+					var remain = 24 * total;
+					$('.item input[type=checkbox]:checked').each(function(index, el) {
+						cost += updateTime($(el));
+					});
+					remain = remain - cost;
+					if (remain < 0) {
+						remain = 0;
+					}
+					var hours = remain % 24;
+					var days = (remain - hours) / 24;
+					$('.days').text(days);
+					$('.hours').text(hours);
+					if (hours) { days++; }
+					$('.numerator').text(days);
+				}
 
 				init();
-				var width = $('.pagewrapper').width();
-				var startX = 0;
-				var offsetX = 0;
-				var offset = 0;
-				// $('a, input, .page label').on('touchstart', function(event){
-				// 	$(event.target)[0].click();
-				// 	event.preventDefault();
-				// 	event.stopPropagation();
-				// 	return false;
-				// });
-				// $('.pagewrapper').on('touchstart', function(event) {
-				// 	event.preventDefault();
-				// 	if (!startX) {
-				// 		var touch = event.originalEvent.touches[0];
-				// 		startX = touch.pageX;
-				// 	}
-				// });
-				// $('.pagewrapper').on('touchmove', function(event) {
-				// 	event.preventDefault();
-				// 	if (!startX) { return false; }
-				// 	var touch = event.originalEvent.touches[0];
-				// 	offsetX = touch.pageX - startX;
-				// 	offset += offsetX;
-				// 	startX = touch.pageX;
-				// 	$(".pagewrapper").css('left', '+='+offsetX);
-				// });
-				// $('.pagewrapper').on('touchend', function(event) {
-				// 	event.preventDefault();
-				// 	if (!startX) { return false; }
-				// 	var touch = event.originalEvent.touches[0];
-				// 	var current = $('.current');
-				// 	var next = current;
+				$('a, input, .page label, #dtBox').on('touchstart', function(event){
+					$(event.target)[0].focus();
+					$(event.target)[0].click();
+					event.preventDefault();
+					event.stopPropagation();
+					return false;
+				});
+				$('.pagewrapper').on('touchstart', function(event) {
+					event.preventDefault();
+					if (!startX) {
+						var touch = event.originalEvent.touches[0];
+						startX = touch.pageX;
+					}
+				});
+				$('.pagewrapper').on('touchmove', function(event) {
+					event.preventDefault();
+					if (!startX) { return false; }
+					var touch = event.originalEvent.touches[0];
+					offsetX = touch.pageX - startX;
+					offset += offsetX;
+					startX = touch.pageX;
+					$(".pagewrapper").css('left', '+='+offsetX);
+				});
+				$('.pagewrapper').on('touchend', function(event) {
+					event.preventDefault();
+					if (!startX) { return false; }
+					var touch = event.originalEvent.touches[0];
+					var current = $('.current');
+					var next = current;
 
-				// 	if (Math.abs(offset) <= Math.abs(offsetX)) {
-				// 		offsetX = 0;
-				// 	}
+					if (Math.abs(offset) <= Math.abs(offsetX)) {
+						offsetX = 0;
+					}
 
-				// 	if (offsetX < 0) {
-				// 		next = current.next();
-				// 		next = next.length === 1 ? next : current;
-				// 	} else if (offsetX > 0) {
-				// 		next = current.prev();
-				// 		next = next.length === 1 ? next : current;
-				// 	}
-				// 	var index = $('.page').index(next);
-				// 	var left = index * width;
-				// 	current.removeClass('current');
-				// 	next.addClass('current');
-				// 	$('.pagewrapper').animate({
-				// 		left: -left
-				// 	}, 'fast');
-				// 	startX = 0;
-				// 	offset = 0;
-				// });
+					if (offsetX < 0) {
+						next = current.next();
+						next = next.length === 1 ? next : current;
+					} else if (offsetX > 0) {
+						next = current.prev();
+						next = next.length === 1 ? next : current;
+					}
+					var index = $('.page').index(next);
+					var left = index * width;
+					current.removeClass('current');
+					next.addClass('current');
+					if (next.hasClass('result')) {
+						updateRemain();
+					} else if (next.hasClass('arrangement')) {
+						updateAllTime();
+					}
+					$('.pagewrapper').animate({
+						left: -left
+					}, 'fast');
+					startX = 0;
+					offset = 0;
+				});
 			});
 		</script>
 	</body>
