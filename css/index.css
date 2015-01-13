@@ -3,6 +3,7 @@ html, body {
 	padding: 0;
 	height: 100%;
 	overflow: hidden;
+	-ms-touch-action: none;
 	color: white;
 	background: #CC543A;
 }
@@ -25,7 +26,7 @@ html, body {
 	display: block;
 }
 .section {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 .header {
 	text-align: center;

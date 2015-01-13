@@ -112,6 +112,11 @@
 					});
 					$('.pagewrapper').show();
 					width = $('.pagewrapper').width();
+
+					$('a, input.time, .page label, #dtBox').on('touchstart MSPointerDown', touchExclude);
+					$('.pagewrapper').on('touchstart MSPointerDown', onTouchStart);
+					$('.pagewrapper').on('touchmove MSPointerMove', onTouchMove);
+					$('.pagewrapper').on('touchend MSPointerUp', onTouchEnd);
 				}
 
 				function initArrangements() {
@@ -189,34 +194,47 @@
 					$('.numerator').text(days);
 				}
 
-				init();
-				$('a, input, .page label, #dtBox').on('touchstart', function(event){
-					$(event.target)[0].focus();
-					$(event.target)[0].click();
+				function getTouch(event) {
+					if ('pageX' in event.originalEvent) {
+						return event.originalEvent;
+					} else {
+						return event.originalEvent.touches[0];
+					}
+				}
+
+				function touchExclude(event) {
+					if ($(event.target).hasClass('time')) {
+						$(event.target)[0].focus();
+					} else {
+						$(event.target)[0].click();
+					}
 					event.preventDefault();
 					event.stopPropagation();
-					return false;
-				});
-				$('.pagewrapper').on('touchstart', function(event) {
+					return false;					
+				}
+
+				function onTouchStart(event) {
 					event.preventDefault();
 					if (!startX) {
-						var touch = event.originalEvent.touches[0];
+						var touch = getTouch(event);
 						startX = touch.pageX;
 					}
-				});
-				$('.pagewrapper').on('touchmove', function(event) {
+				}
+
+				function onTouchMove(event) {
 					event.preventDefault();
 					if (!startX) { return false; }
-					var touch = event.originalEvent.touches[0];
+					var touch = getTouch(event);
 					offsetX = touch.pageX - startX;
 					offset += offsetX;
 					startX = touch.pageX;
 					$(".pagewrapper").css('left', '+='+offsetX);
-				});
-				$('.pagewrapper').on('touchend', function(event) {
+				}
+
+				function onTouchEnd(event) {
 					event.preventDefault();
 					if (!startX) { return false; }
-					var touch = event.originalEvent.touches[0];
+					var touch = getTouch(event);
 					var current = $('.current');
 					var next = current;
 
@@ -245,7 +263,10 @@
 					}, 'fast');
 					startX = 0;
 					offset = 0;
-				});
+				}
+
+
+				init();
 			});
 		</script>
 	</body>
