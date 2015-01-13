@@ -76,13 +76,13 @@
 					classmates: {
 						party: {freq: 7, time: 5, name: '聚会'},
 						KTV: {freq: 7, time: 5, name: 'KTV'},
-						travel: {freq: 7, time: 12, name: '出游'},
-						shopping: {freq: 3, time: 8, name: '逛街'}
+						travel: {freq: 7, time: 6, name: '出游'},
+						shopping: {freq: 7, time: 8, name: '逛街'}
 					},
 					friends: {
-						kinsman: {freq: 2, time: 8, name: '串亲戚'},
+						kinsman: {freq: 5, time: 8, name: '串亲戚'},
 						date: {freq: 4, time: 12, name: '相亲'},
-						blabla: {freq: 7, time: 8, name: '陪七大姑八大婶聊人生'}
+						blabla: {freq: 7, time: 4, name: '陪七大姑聊人生'}
 					},
 					own: {
 						mobile: {freq: 1, time: 5, name: '手机党'},
@@ -131,22 +131,24 @@
 					if (start && end && end>=start) {
 						total = (end - start) / (24*60*60*1000) + 1;
 						$('.total').text(total);
+					} else {
+						total = 0;
+						$('.total').text('?');
 					}
 				}
 
 				function updateTime(el) {
-					if (!total) { return; }
 					var parent = el.data('type');
 					var item = {};
 					var cost = 0;
-					if (el.is(':checked')) {
+					if (total && el.is(':checked')) {
 						try {
 							item = config[parent][el.attr('class')];
 						} catch (e) {
 							console.warn('unknown item');
 						}
 						if (item['freq']) {
-							cost = item['time'] * Math.ceil(total / item['freq']) || 0;
+							cost = Math.ceil(item['time'] * total / item['freq']) || 0;
 						} else {
 							cost = item['time'] || 0;
 						}
@@ -158,14 +160,18 @@
 				}
 
 				function updateAllTime() {
-					if (!total) { return; }
 					$('.item input[type=checkbox]:checked').each(function(index, el) {
 						updateTime($(el));
 					});
 				}
 
 				function updateRemain() {
-					if (!total) { return; }
+					if (!total) { 
+						$('.days').text('?');
+						$('.hours').text('?');
+						$('.numerator').text('?');
+						return; 
+					}
 					var cost = 0;
 					var remain = 24 * total;
 					$('.item input[type=checkbox]:checked').each(function(index, el) {
