@@ -12,27 +12,26 @@
 	<body>
 		<div class="pagewrapper">
 			<div class="page holiday">
-				<div class="header">填写假期日期</div>
-				<div class="content">
-					<div class="section">
-						<div class="subject">回家日期</div>
-						<div class="item">
-							<input type="text" id="start" class="time start" data-field="date" data-startend="start" data-startendelem=".end" readonly>
-						</div>
-					</div>
-					<div class="section">
-						<div class="subject">离家日期</div>
-						<div class="item">
-							<input type="text" id="end" class="time end" data-field="date" data-startend="end" data-startendelem=".start" readonly>
-						</div>
-					</div>
-					<div id="dtBox"></div>
-					<div class="info">
-						假期共计
-						<span class="total">?</span>
-						天
-					</div>
+				<div class="header">
+					<img class="title" src="../img/title.png" alt="">
 				</div>
+				<div class="startend surface">
+					<input type="text" id="start" class="time start" data-field="date" data-startend="start" data-startendelem=".end" data-min="2015-01-01" data-max="2015-03-31" placeholder="回家日期" readonly>
+					至
+					<input type="text" id="end" class="time end" data-field="date" data-startend="end" data-startendelem=".start" data-min="2015-01-01" data-max="2015-03-31" placeholder="离家日期" readonly>
+				</div>
+				<div class="statistic surface">
+					假期共计
+					<span class="total">
+						<span class="number high zero">0</span>
+						<span class="number low zero">0</span>
+					</span>
+					天
+				</div>
+				<div class="bottom">
+					<img class="people" src="../img/people.png" alt="">
+				</div>
+				<div id="dtBox"></div>
 			</div>
 			<div class="page arrangement">
 				<div class="header">假期活动安排</div>
@@ -47,9 +46,10 @@
 				</div>
 			</div>
 			<div class="page result">
-				<div class="header">Family Time</div>
 				<div class="info">
-					能陪伴父母的时间
+					<span class="small">能</span>陪伴父母<span class="small">的时间</span>
+				</div>
+				<div class="info">
 					只剩
 				</div>
 				<div class="remain">

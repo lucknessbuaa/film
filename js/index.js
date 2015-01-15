@@ -1,7 +1,7 @@
 $(function(){
-	var width = 0;
-	var startX = 0;
-	var offsetX = 0;
+	var height = 0;
+	var startY = 0;
+	var offsetY = 0;
 	var offset = 0;
 	var total = 0;
 	var config = {
@@ -25,9 +25,6 @@ $(function(){
 	var tpl = '<div class="item"><label><input type="checkbox" class="$type" data-type="$subject">$name</label><span></span></div>';
 
 	function init() {
-		$('.page').each(function(index, el) {
-			$(el).css('left', index+'00%');
-		});
 		$('.page').eq(0).addClass('current');
 
 		$('#dtBox').DateTimePicker({
@@ -43,12 +40,12 @@ $(function(){
 			updateTime($(event.target));
 		});
 		$('.pagewrapper').show();
-		width = $('.pagewrapper').width();
+		height = $('.pagewrapper').height();
 
 		$('a, input.time, .page label, #dtBox').on('touchstart MSPointerDown', touchExclude);
-		$('.pagewrapper').on('touchstart MSPointerDown', onTouchStart);
-		$('.pagewrapper').on('touchmove MSPointerMove', onTouchMove);
-		$('.pagewrapper').on('touchend MSPointerUp', onTouchEnd);
+		$(document).on('touchstart MSPointerDown', onTouchStart);
+		$(document).on('touchmove MSPointerMove', onTouchMove);
+		$(document).on('touchend MSPointerUp', onTouchEnd);
 	}
 
 	function initArrangements() {
@@ -62,15 +59,24 @@ $(function(){
 		});
 	}
 
+	function loadHoliday() {
+		
+	}
+
 	function updateTotal() {
 		var start = Date.parse($('#start').val()) || 0;
 		var end = Date.parse($('#end').val()) || 0;
 		if (start && end && end>=start) {
 			total = (end - start) / (24*60*60*1000) + 1;
-			$('.total').text(total);
+			var low = total % 10;
+			var high = ((total-low)/10) % 10;
+			$('.total span.low').text(low).removeClass('zero');
+			$('.total span.high').text(high);
+			if (high) { $('.total span.high').removeClass('zero'); }
 		} else {
 			total = 0;
-			$('.total').text('?');
+			$('.total span.high').text('0').addClass('zero');
+			$('.total span.low').text('0').addClass('zero');
 		}
 	}
 
@@ -126,8 +132,8 @@ $(function(){
 		$('.numerator').text(days);
 	}
 
-	function getCurX(event) {
-		return event.originalEvent.pageX || event.originalEvent.targetTouches[0].pageX;
+	function getCurY(event) {
+		return event.originalEvent.pageY || event.originalEvent.targetTouches[0].pageY;
 	}
 
 	function touchExclude(event) {
@@ -143,40 +149,43 @@ $(function(){
 
 	function onTouchStart(event) {
 		event.preventDefault();
-		if (!startX) {
-			startX = getCurX(event);
+		if (!startY) {
+			startY = getCurY(event);
 		}
 	}
 
 	function onTouchMove(event) {
 		event.preventDefault();
-		if (!startX) { return false; }
-		var curX = getCurX(event);
-		offsetX = curX - startX;
-		offset += offsetX;
-		startX = curX;
-		$(".pagewrapper").css('left', '+='+offsetX);
+		if (!startY) { return false; }
+		var curY = getCurY(event);
+		offsetY = curY - startY;
+		offset += offsetY;
+		startY = curY;
+		$(".pagewrapper").css('top', '+='+offsetY);
+
+		var opacity = 0.8-Math.abs(offset)/height;
+		opacity = opacity < 0 ? 0 : opacity;
+		$(".current").css('opacity', opacity);
 	}
 
 	function onTouchEnd(event) {
 		event.preventDefault();
-		if (!startX) { return false; }
+		if (!startY) { return false; }
 		var current = $('.current');
 		var next = current;
 
-		if (Math.abs(offset) <= Math.abs(offsetX)) {
-			offsetX = 0;
+		if (Math.abs(offset) <= Math.abs(offsetY)) {
+			offsetY = 0;
 		}
 
-		if (offsetX < 0) {
+		if (offsetY < 0) {
 			next = current.next();
 			next = next.length === 1 ? next : current;
-		} else if (offsetX > 0) {
+		} else if (offsetY > 0) {
 			next = current.prev();
 			next = next.length === 1 ? next : current;
 		}
 		var index = $('.page').index(next);
-		var left = index * width;
 		current.removeClass('current');
 		next.addClass('current');
 		if (next.hasClass('result')) {
@@ -185,12 +194,13 @@ $(function(){
 			updateAllTime();
 		}
 		$('.pagewrapper').animate({
-			left: -left
-		}, 'fast');
-		startX = 0;
+			top: -index+'00%'
+		}, 'fast', function(){
+			current.css('opacity',1);
+		});
+		startY = 0;
 		offset = 0;
 	}
-
 
 	init();
 });
