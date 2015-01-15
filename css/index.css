@@ -20,6 +20,7 @@ html, body {
 	display: none;
 }
 .page {
+	position: relative;
 	width: 100%;
 	height: 100%;
 	background: url('../img/bg.png') no-repeat top left;
@@ -31,14 +32,12 @@ html, body {
 	position: relative;
 	z-index: 2;
 }
-img.people {
-	position: absolute;
-	bottom: 0;
+img.people, img.parents, img.title, img.children {
 	width: 100%;
+	position: absolute;
 }
-img.title {
-	width: 100%;
-	position: absolute;
+img.people, img.parents {
+	bottom: 0;
 }
 div.startend {
 	margin-top: 40%;
@@ -72,7 +71,7 @@ input.time.start {
 input.time.end {
 	float: right;
 }
-.statistic {
+.statistic, .remain {
 	clear: both;
 	text-align: center;
 	font-size: 20px;
@@ -93,10 +92,11 @@ input.time.end {
 }
 .result .info {
 	text-align: center;
-	font-size: 18px;
+	font-size: 20px;
+	margin: 15px;
 }
 span.small {
-	font-size: 14px;
+	font-size: 15px;
 }
 
 

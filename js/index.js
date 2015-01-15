@@ -63,21 +63,34 @@ $(function(){
 		
 	}
 
+	function updateNumber(number, $el, nozero) {
+		var $high = $el.find('.high');
+		var $low = $el.find('.low');
+		if (!number && !nozero) {
+			$high.text('0').addClass('zero');
+			$low.text('0').addClass('zero');
+			return;
+		}
+		var low = number % 10;
+		var high = ((number-low)/10) % 10;
+		$low.text(low).removeClass('zero');
+		$high.text(high);
+		if (high || nozero) { 
+			$high.removeClass('zero'); 
+		} else {
+			$high.addClass('zero');
+		}
+	}
+
 	function updateTotal() {
 		var start = Date.parse($('#start').val()) || 0;
 		var end = Date.parse($('#end').val()) || 0;
 		if (start && end && end>=start) {
 			total = (end - start) / (24*60*60*1000) + 1;
-			var low = total % 10;
-			var high = ((total-low)/10) % 10;
-			$('.total span.low').text(low).removeClass('zero');
-			$('.total span.high').text(high);
-			if (high) { $('.total span.high').removeClass('zero'); }
 		} else {
 			total = 0;
-			$('.total span.high').text('0').addClass('zero');
-			$('.total span.low').text('0').addClass('zero');
 		}
+		updateNumber(total, $('.total'));
 	}
 
 	function updateTime(el) {
@@ -109,10 +122,9 @@ $(function(){
 	}
 
 	function updateRemain() {
-		if (!total) { 
-			$('.days').text('?');
-			$('.hours').text('?');
-			$('.numerator').text('?');
+		if (!total) {
+			updateNumber(0, $('.days'));
+			updateNumber(0, $('.hours'));
 			return; 
 		}
 		var cost = 0;
@@ -126,10 +138,10 @@ $(function(){
 		}
 		var hours = remain % 24;
 		var days = (remain - hours) / 24;
-		$('.days').text(days);
-		$('.hours').text(hours);
-		if (hours) { days++; }
-		$('.numerator').text(days);
+		updateNumber(days, $('.days'));
+		var nozero = 0;
+		if (days) { nozero = 1; }
+		updateNumber(hours, $('.hours'), nozero);
 	}
 
 	function getCurY(event) {
