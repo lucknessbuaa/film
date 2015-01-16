@@ -44,6 +44,7 @@ $(function(){
 		height = $('.pagewrapper').height();
 
 		$('a, input.time, .page label, #dtBox').on('touchstart MSPointerDown', touchExclude);
+		$('input.time').on('change', refreshTip);
 		$(document).on('touchstart MSPointerDown', onTouchStart);
 		$(document).on('touchmove MSPointerMove', onTouchMove);
 		$(document).on('touchend MSPointerUp', onTouchEnd);
@@ -69,6 +70,21 @@ $(function(){
 		} else if ($page.hasClass('film')) {
 			loadFilm();
 		}
+	}
+
+	function refreshTip(event) {
+		var $el = $(event.target);
+		if ($el.val().trim() == '') {
+			$el.addClass('tip');
+		} else {
+			$el.removeClass('tip');
+		}
+	}
+
+	function showTip() {
+		$('input.time').each(function(index, el) {
+			if ($(el).val().trim() == '') { $(el).addClass('tip'); }
+		});
 	}
 
 	function loadHoliday() {
@@ -212,6 +228,7 @@ $(function(){
 		if (!startY) { return false; }
 		var current = $('.current');
 		var next = current;
+		var flag = 0;
 
 		if (Math.abs(offset) <= Math.abs(offsetY)) {
 			offsetY = 0;
@@ -224,6 +241,8 @@ $(function(){
 			next = current.prev();
 			next = next.length === 1 ? next : current;
 		}
+		if (current.hasClass('holiday') && !total) { next = current; flag = 1; }
+
 		var index = $('.page').index(next);
 		current.removeClass('current');
 		next.addClass('current');
@@ -239,6 +258,9 @@ $(function(){
 			current.css('opacity',1);
 			if (current != next) {
 				refreshPage(next);
+			}
+			if (flag) {
+				showTip();
 			}
 		});
 		startY = 0;
