@@ -22,7 +22,7 @@ $(function(){
 			traffic: {freq: 0, time: 30, name: '春运'}
 		}
 	};
-	var tpl = '<div class="item"><label><input type="checkbox" class="$type" data-type="$subject">$name<span></span></label></div>';
+	var tpl = '<div class="item"><label id="$type"><input type="checkbox" class="$type" data-type="$subject">$name<span></span></label></div>';
 
 	function init() {
 		$('.page').eq(0).addClass('current');
@@ -54,7 +54,7 @@ $(function(){
 			var subject = $(el).attr('class').replace('section', '').trim();
 			if (!(subject in config)) { return; }
 			for (var item in config[subject]) {
-				var $item = $(tpl.replace('$subject', subject).replace('$type', item).replace('$name', config[subject][item]['name']));
+				var $item = $(tpl.replace(/\$subject/g, subject).replace(/\$type/g, item).replace(/\$name/g, config[subject][item]['name']));
 				$item.appendTo($(el));
 			}
 		});
