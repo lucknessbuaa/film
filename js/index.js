@@ -22,7 +22,7 @@ $(function(){
 			traffic: {freq: 0, time: 30, name: '春运'}
 		}
 	};
-	var tpl = '<div class="item"><label><input type="checkbox" class="$type" data-type="$subject">$name</label><span></span></div>';
+	var tpl = '<div class="item"><label><input type="checkbox" class="$type" data-type="$subject">$name<span></span></label></div>';
 
 	function init() {
 		$('.page').eq(0).addClass('current');
@@ -66,6 +66,8 @@ $(function(){
 			loadHoliday();
 		} else if ($page.hasClass('result')) {
 			loadResult();
+		} else if ($page.hasClass('film')) {
+			loadFilm();
 		}
 	}
 
@@ -77,6 +79,10 @@ $(function(){
 	function loadResult() {
 		setTimeout(function() {$('img.parents').addClass('blurin').show();}, 500);
 		$('img.children').addClass('blurin').show();
+	}
+
+	function loadFilm() {
+		$('img.film_ticket').addClass('blurin').show();
 	}
 
 	function updateNumber(number, $el, nozero) {
@@ -113,7 +119,7 @@ $(function(){
 		var parent = el.data('type');
 		var item = {};
 		var cost = 0;
-		if (total && el.is(':checked')) {
+		if (total) {
 			try {
 				item = config[parent][el.attr('class')];
 			} catch (e) {
@@ -124,15 +130,20 @@ $(function(){
 			} else {
 				cost = item['time'] || 0;
 			}
-			el.parent().siblings('span').text(cost+'小时').show();
+			el.parent().find('span').text(' '+cost+'h').show();
 		} else {
-			el.parent().siblings('span').text('').hide();
+			el.parent().find('span').text('').hide();
+		}
+		if (el.is(':checked')) {
+			el.parent().addClass('checked');
+		} else {
+			el.parent().removeClass('checked');
 		}
 		return cost;
 	}
 
 	function updateAllTime() {
-		$('.item input[type=checkbox]:checked').each(function(index, el) {
+		$('.item input[type=checkbox]').each(function(index, el) {
 			updateTime($(el));
 		});
 	}
@@ -224,8 +235,11 @@ $(function(){
 		$('.pagewrapper').animate({
 			top: -index+'00%'
 		}, 'fast', function(){
+			next.animate({'opacity':1});
 			current.css('opacity',1);
-			refreshPage(next);
+			if (current != next) {
+				refreshPage(next);
+			}
 		});
 		startY = 0;
 		offset = 0;
