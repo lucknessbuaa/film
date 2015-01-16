@@ -2,6 +2,26 @@
     font-family: modifiedFont;
     src: url('../font/m.ttf');
 }
+@-webkit-keyframes blurin {
+	from {
+		-webkit-filter: blur(10px);
+		filter: blur(10px);
+		width: 140%;
+		margin-left: -20%;
+		margin-top: -10%;
+	}
+	to {
+		-webkit-filter: blur(0px);
+		filter: blur(0px);
+		width: 100%;
+		margin-left: 0;
+		margin-top: 0;
+	}
+}
+@keyframes blurin {
+	from { filter: blur(10px); }
+	to { filter: blur(0px); }
+}
 html, body {
 	margin: 0;
 	padding: 0;
@@ -32,12 +52,19 @@ html, body {
 	position: relative;
 	z-index: 2;
 }
-img.people, img.parents, img.title, img.children {
+img.hide {
+	display: none;
+}
+img.full {
 	width: 100%;
 	position: absolute;
 }
 img.people, img.parents {
 	bottom: 0;
+}
+img.blurin {
+	-webkit-animation: blurin 1s;
+	animation: blurin 1s;
 }
 div.startend {
 	margin-top: 40%;

@@ -40,6 +40,7 @@ $(function(){
 			updateTime($(event.target));
 		});
 		$('.pagewrapper').show();
+		loadHoliday();
 		height = $('.pagewrapper').height();
 
 		$('a, input.time, .page label, #dtBox').on('touchstart MSPointerDown', touchExclude);
@@ -59,8 +60,23 @@ $(function(){
 		});
 	}
 
+	function refreshPage($page) {
+		$('.blurin').removeClass('blurin').hide();
+		if ($page.hasClass('holiday')) {
+			loadHoliday();
+		} else if ($page.hasClass('result')) {
+			loadResult();
+		}
+	}
+
 	function loadHoliday() {
-		
+		setTimeout(function() {$('img.ticket').addClass('blurin').show();}, 500);
+		$('img.title').addClass('blurin').show();
+	}
+
+	function loadResult() {
+		setTimeout(function() {$('img.parents').addClass('blurin').show();}, 500);
+		$('img.children').addClass('blurin').show();
 	}
 
 	function updateNumber(number, $el, nozero) {
@@ -209,6 +225,7 @@ $(function(){
 			top: -index+'00%'
 		}, 'fast', function(){
 			current.css('opacity',1);
+			refreshPage(next);
 		});
 		startY = 0;
 		offset = 0;
