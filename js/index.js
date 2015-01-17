@@ -183,7 +183,7 @@ $(function(){
 		var days = (remain - hours) / 24;
 		updateNumber(days, $('.days'));
 		var nozero = 0;
-		if (days) { nozero = 1; }
+		if (total) { nozero = 1; }
 		updateNumber(hours, $('.hours'), nozero);
 	}
 
