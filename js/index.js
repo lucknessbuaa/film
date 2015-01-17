@@ -1,5 +1,6 @@
 $(function(){
 	var height = 0;
+	var started = 0;
 	var startY = 0;
 	var offsetY = 0;
 	var offset = 0;
@@ -23,6 +24,7 @@ $(function(){
 		}
 	};
 	var tpl = '<div class="item"><label id="$type"><input type="checkbox" class="$type" data-type="$subject">$name<span></span></label></div>';
+	var url = 'http://xiaoyuanzhida.com/xiaoyuanzhida/xyzd/campaign.action?campaignid=1';
 
 	function init() {
 		$('.page').eq(0).addClass('current');
@@ -36,6 +38,7 @@ $(function(){
 			updateTotal();
 		});
 		initArrangements();
+		refreshAttendant();
 		$('.arrangement input').click(function(event) {
 			updateTime($(event.target));
 		});
@@ -48,6 +51,7 @@ $(function(){
 		$(document).on('touchstart MSPointerDown', onTouchStart);
 		$(document).on('touchmove MSPointerMove', onTouchMove);
 		$(document).on('touchend MSPointerUp', onTouchEnd);
+		$(document).on('touchcancel MSPointerCancel', onTouchEnd);
 	}
 
 	function initArrangements() {
@@ -59,6 +63,21 @@ $(function(){
 				$item.appendTo($(el));
 			}
 		});
+	}
+
+	function refreshAttendant() {
+		var count = localStorage.count || 0;
+		if (!count) {
+			$.get(url, function(data) {
+				if (data && 'Joinnum' in data) {
+					count = data.Joinnum;
+				}
+			});
+		}
+		if (count) {
+			$('.count').text(count);
+			$('.attendant').css('opacity', 1);
+		}	
 	}
 
 	function refreshPage($page) {
@@ -199,19 +218,20 @@ $(function(){
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		return false;					
+		return false;
 	}
 
 	function onTouchStart(event) {
 		event.preventDefault();
-		if (!startY) {
+		if (!started) {
 			startY = getCurY(event);
+			started = 1;
 		}
 	}
 
 	function onTouchMove(event) {
 		event.preventDefault();
-		if (!startY) { return false; }
+		if (!started) { return false; }
 		var curY = getCurY(event);
 		offsetY = curY - startY;
 		offset += offsetY;
@@ -225,7 +245,6 @@ $(function(){
 
 	function onTouchEnd(event) {
 		event.preventDefault();
-		if (!startY) { return false; }
 		var current = $('.current');
 		var next = current;
 		var flag = 0;
@@ -263,6 +282,7 @@ $(function(){
 				showTip();
 			}
 		});
+		started = 0;
 		startY = 0;
 		offset = 0;
 	}
