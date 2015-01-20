@@ -50,6 +50,8 @@ html, body {
 	font-family: modifiedFont;
 	touch-action: none;
 	-ms-touch-action: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+	-webkit-tap-highlight-color: transparent;
 }
 .pagewrapper {
 	position: relative;

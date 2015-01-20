@@ -114,7 +114,7 @@ $(function(){
 					$('.attendant').css('opacity', 1);
 				}
 			} catch(e) {
-				;
+				console.log('cannot get joinnum');
 			}
 		});
 	}
@@ -264,6 +264,7 @@ $(function(){
 	}
 
 	function onTouchStart(event) {
+		console.log('start');
 		event.preventDefault();
 		initIOSAudio();
 		if (!started) {
@@ -273,6 +274,7 @@ $(function(){
 	}
 
 	function onTouchMove(event) {
+		console.log('move');
 		event.preventDefault();
 		if (!started) { return false; }
 		var curY = getCurY(event);
@@ -281,13 +283,18 @@ $(function(){
 		startY = curY;
 		$(".pagewrapper").css('top', '+='+offsetY);
 
-		var opacity = 0.8-Math.abs(offset)/height;
+		var opacity = 0.9-Math.abs(offset)/height;
 		opacity = opacity < 0 ? 0 : opacity;
 		$(".current").css('opacity', opacity);
+		if (curY<=0) {
+			onTouchEnd(event);
+		}
 	}
 
 	function onTouchEnd(event) {
+		console.log('end');
 		event.preventDefault();
+		if (!started) { return false; }
 		var current = $('.current');
 		var next = current;
 		var flag = 0;
@@ -297,10 +304,10 @@ $(function(){
 		}
 
 		if (offsetY < 0) {
-			next = current.next();
+			next = current.next('.page');
 			next = next.length === 1 ? next : current;
 		} else if (offsetY > 0) {
-			next = current.prev();
+			next = current.prev('.page');
 			next = next.length === 1 ? next : current;
 		}
 		if (current.hasClass('holiday') && !total) { next = current; flag = 1; }
