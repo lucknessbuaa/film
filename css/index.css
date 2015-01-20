@@ -32,6 +32,14 @@
 		margin-top: 0;
 	}
 }
+@-webkit-keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}   
+}
+@keyframes spin {
+    0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}   
+}
 html, body {
 	margin: 0;
 	padding: 0;
@@ -72,16 +80,37 @@ html, body {
 	background: url('../img/arrow.png') no-repeat center;
 	background-size: contain;
 }
+div.audio {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	padding: 10px;
+	right: 0;
+	background: url('../img/mute_music.png') no-repeat;
+	background-origin: content-box;
+	background-size: cover;
+	-webkit-animation: spin 3s infinite linear;
+	animation: spin 3s infinite linear;
+}
+div.audio.mute {
+	background: url('../img/music.png') no-repeat;
+	background-origin: content-box;
+	background-size: cover;
+	-webkit-animation: none !important;
+	animation: none !important;
+}
 .surface {
 	position: relative;
 	z-index: 2;
 }
-img.hide {
+.hide {
 	display: none;
 }
 img.full {
 	width: 100%;
 	position: absolute;
+	transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d(0, 0, 0);
 }
 img.people, img.parents {
 	bottom: 0;
@@ -93,8 +122,8 @@ img.film_ticket {
 	bottom: 54%;
 }
 img.blurin {
-	-webkit-animation: blurin 1s;
-	animation: blurin 1s;
+	-webkit-animation: blurin 0.5s ease;
+	animation: blurin 0.5s ease;
 }
 div.startend {
 	margin-top: 40%;

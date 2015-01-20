@@ -24,7 +24,10 @@ $(function(){
 		}
 	};
 	var tpl = '<div class="item"><label id="$type"><input type="checkbox" class="$type" data-type="$subject">$name<span></span></label></div>';
-	var url = 'http://xiaoyuanzhida.com/xiaoyuanzhida/xyzd/campaign.action?campaignid=1';
+	var url = '/api?campaignid=1';
+	var track = '/audio/1.mp3';
+	var audio = null;
+	var played = 0;
 
 	function init() {
 		$('.page').eq(0).addClass('current');
@@ -43,15 +46,52 @@ $(function(){
 			updateTime($(event.target));
 		});
 		$('.pagewrapper').show();
+		initTrack();
 		loadHoliday();
 		height = $('.pagewrapper').height();
 
-		$('a, input.time, .page label, #dtBox').on('touchstart MSPointerDown', touchExclude);
+		$('a, input.time, .page label, #dtBox, div.audio').on('touchstart MSPointerDown', touchExclude);
 		$('input.time').on('change', refreshTip);
 		$(document).on('touchstart MSPointerDown', onTouchStart);
 		$(document).on('touchmove MSPointerMove', onTouchMove);
 		$(document).on('touchend MSPointerUp', onTouchEnd);
 		$(document).on('touchcancel MSPointerCancel', onTouchEnd);
+		$(document).on('touchleave MSPointerOut', onTouchEnd);
+	}
+
+	function initTrack() {
+		audio = document.getElementById('bgAudio');
+		audio.loop = true;
+		$('div.audio').click(function(event){
+			var $el = $(event.target);
+			if ($el.hasClass('mute')) {
+				playAudio();
+			} else {
+				muteAudio();
+			}
+		});
+		if (!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
+			audio.autoplay = true;
+			$('div.audio').eq(0).click();
+			played = 1;
+		}
+	}
+
+	function playAudio() {
+		audio.play();
+		$('div.audio').removeClass('mute');
+	}
+
+	function muteAudio() {
+		audio.pause();
+		$('div.audio').addClass('mute');
+	}
+
+	function initIOSAudio() {
+		if (!played && /(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
+			$('div.audio').eq(0).click();
+			played = 1;
+		}
 	}
 
 	function initArrangements() {
@@ -66,18 +106,17 @@ $(function(){
 	}
 
 	function refreshAttendant() {
-		var count = localStorage.count || 0;
-		if (!count) {
-			$.get(url, function(data) {
-				if (data && 'Joinnum' in data) {
-					count = data.Joinnum;
+		$.get(url, function(data) {
+			try {
+				var ret = JSON.parse(data);
+				if (ret && 'Joinnum' in ret) {
+					$('.count').text(ret.Joinnum);
+					$('.attendant').css('opacity', 1);
 				}
-			});
-		}
-		if (count) {
-			$('.count').text(count);
-			$('.attendant').css('opacity', 1);
-		}	
+			} catch(e) {
+				;
+			}
+		});
 	}
 
 	function refreshPage($page) {
@@ -211,6 +250,9 @@ $(function(){
 	}
 
 	function touchExclude(event) {
+		if (!$(event.target).hasClass('audio')) {
+			initIOSAudio();
+		}
 		if ($(event.target).hasClass('time')) {
 			$(event.target)[0].focus();
 		} else {
@@ -223,6 +265,7 @@ $(function(){
 
 	function onTouchStart(event) {
 		event.preventDefault();
+		initIOSAudio();
 		if (!started) {
 			startY = getCurY(event);
 			started = 1;
