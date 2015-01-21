@@ -32,10 +32,33 @@ $(function(){
 	function init() {
 		$('.page').eq(0).addClass('current');
 
-		$('#dtBox').DateTimePicker({
-			shortMonthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-			formatHumanDate: function(date) {return date.monthShort + " " + date.dd + ", " + date.yyyy;},
-			dateFormat: "yyyy-MM-dd"
+		$('input.time#start').datetimepicker({
+			lang: 'zh',
+			format: 'Y-m-d',
+			timepicker: false,
+			closeOnDateSelect: true,
+			minDate: 0,
+			maxDate: '2015-03-31',
+			formatDate: 'Y-m-d',
+			onShow: function(ct) {
+				this.setOptions({
+					maxDate: $('#end').val() ? $('#end').val() : '2015-03-31'
+				})
+			}
+		});
+		$('input.time#end').datetimepicker({
+			lang: 'zh',
+			format: 'Y-m-d',
+			timepicker: false,
+			closeOnDateSelect: true,
+			minDate: 0,
+			maxDate: '2015-03-31',
+			formatDate: 'Y-m-d',
+			onShow: function(ct) {
+				this.setOptions({
+					minDate: $('#start').val() ? $('#start').val() : 0
+				})
+			}
 		});
 		$('.time').change(function(event) {
 			updateTotal();
@@ -50,7 +73,7 @@ $(function(){
 		loadHoliday();
 		height = $('.pagewrapper').height();
 
-		$('a, input.time, .page label, #dtBox, div.audio').on('touchstart MSPointerDown', touchExclude);
+		$('a, input.time, .page label, .xdsoft_datetimepicker, div.audio').on('touchstart MSPointerDown', touchExclude);
 		$('input.time').on('change', refreshTip);
 		$(document).on('touchstart MSPointerDown', onTouchStart);
 		$(document).on('touchmove MSPointerMove', onTouchMove);
@@ -253,9 +276,15 @@ $(function(){
 		if (!$(event.target).hasClass('audio')) {
 			initIOSAudio();
 		}
+		if (!$(event.target).parents('.xdsoft_datetimepicker').length) {
+			$('.xdsoft_datetimepicker').hide();
+		}
 		if ($(event.target).hasClass('time')) {
 			$(event.target)[0].focus();
+			$(event.target)[0].blur();
 		} else {
+			$(event.target).trigger('mousedown');
+			$(event.target).trigger('mouseup');
 			$(event.target)[0].click();
 		}
 		event.preventDefault();
@@ -264,6 +293,7 @@ $(function(){
 	}
 
 	function onTouchStart(event) {
+		$('.xdsoft_datetimepicker').hide();
 		console.log('start');
 		event.preventDefault();
 		initIOSAudio();

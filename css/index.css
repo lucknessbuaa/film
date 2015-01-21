@@ -124,8 +124,8 @@ img.film_ticket {
 	bottom: 54%;
 }
 img.blurin {
-	-webkit-animation: blurin 0.5s ease;
-	animation: blurin 0.5s ease;
+	-webkit-animation: blurin 0.3s ease;
+	animation: blurin 0.3s ease;
 }
 div.startend {
 	margin-top: 40%;

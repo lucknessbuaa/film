@@ -4,9 +4,9 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="../css/index.css">
-		<link rel="stylesheet" href="../node_modules/datetimepicker/dist/DateTimePicker.min.css">
+		<link rel="stylesheet" href="../css/jquery.datetimepicker.css">
 		<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/DateTimePicker.js"></script>
+		<script type="text/javascript" src="../js/jquery.datetimepicker.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
 	</head>
 	<body>
@@ -20,9 +20,9 @@
 					<img class="title full hide" src="../img/title.png" alt="">
 				</div>
 				<div class="startend surface">
-					<input type="text" id="start" class="time start" data-field="date" data-startend="start" data-startendelem=".end" data-min="2015-01-01" data-max="2015-03-31" placeholder="回家日期" readonly>
+					<input type="text" id="start" class="time start" placeholder="回家日期" readonly>
 					至
-					<input type="text" id="end" class="time end" data-field="date" data-startend="end" data-startendelem=".start" data-min="2015-01-01" data-max="2015-03-31" placeholder="离家日期" readonly>
+					<input type="text" id="end" class="time end" placeholder="离家日期" readonly>
 				</div>
 				<div class="statistic surface">
 					假期共计
@@ -36,7 +36,6 @@
 					<img class="people full" src="../img/people.png" alt="">
 				</div>
 				<div><img class="ticket full hide" src="../img/ticket.png" alt=""></div>
-				<div id="dtBox"></div>
 			</div>
 			<div class="page arrangement">
 				<div class="audio mute surface"></div>
@@ -77,7 +76,6 @@
 					<a class="buy" href="http://m.baidu.com/s?word=电影票&from=1011178w&tn=iphone&qq-pf-to=pcqq.discussion">百度购电影票家庭套餐</a>
 					<div class="attendant">已有<span class="count">1</span>个人参加</div>
 				</div>
-
 			</div>
 		</div>
 	</body>
