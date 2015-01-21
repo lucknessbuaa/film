@@ -317,12 +317,15 @@ $(function(){
 		startY = curY;
 		$(".pagewrapper").css('top', '+='+offsetY);
 
-		var opacity = 0.9-Math.abs(offset)/height;
-		opacity = opacity < 0 ? 0 : opacity;
-		$(".current").css('opacity', opacity);
+		if (!$('.current').hasClass('long')) {
+			var opacity = 0.9-Math.abs(offset)/height;
+			opacity = opacity < 0 ? 0 : opacity;
+			$(".current").css('opacity', opacity);
+		}
 		if (curY<=0) {
 			onTouchEnd(event);
 		}
+		console.debug(offset);
 	}
 
 	function onTouchEnd(event) {
@@ -338,12 +341,6 @@ $(function(){
 		}
 
 		if (offsetY < 0) {
-			// if ($(event.target).parents('.page').hasClass('long')) {
-			// 	started = 0;
-			// 	startY = 0;
-			// 	offset = 0;
-			// 	return;
-			// }
 			next = current.next('.page');
 			next = next.length === 1 ? next : current;
 		} else if (offsetY > 0) {
@@ -351,8 +348,22 @@ $(function(){
 			next = next.length === 1 ? next : current;
 		}
 		if (current.hasClass('holiday') && !total) { next = current; flag = 1; }
+		if (current.hasClass('long')) {
+			if (offset < 0 && (height - offset) <= current.height()) {
+				started = 0;
+				return;
+			} else if (offset < 0) {
+				next = current;
+				var temp = current.height() - height;
+				var indexFix = temp > 0 ? temp / height : 0;
+				if (indexFix) { offset = -temp; }
+			}
+		}
 
 		var index = $('.page').index(next);
+		if (indexFix) {
+			index += indexFix;
+		}
 		current.removeClass('current');
 		next.addClass('current');
 		if (next.hasClass('result')) {
@@ -361,7 +372,7 @@ $(function(){
 			updateAllTime();
 		}
 		$('.pagewrapper').animate({
-			top: -index+'00%'
+			top: -Math.ceil(index*100)+'%'
 		}, 'fast', function(){
 			next.animate({'opacity':1});
 			current.css('opacity',1);
@@ -373,8 +384,10 @@ $(function(){
 			}
 		});
 		started = 0;
-		startY = 0;
-		offset = 0;
+		if (!indexFix) {
+			startY = 0;
+			offset = 0;
+		}
 	}
 
 	init();

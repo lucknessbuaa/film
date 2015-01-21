@@ -68,9 +68,11 @@ html, body {
 	overflow: hidden;
 	box-sizing: border-box;
 }
-/*.page.long {
-	overflow: initial;
-}*/
+.page.long {
+	min-height: 100%;
+	height: auto;
+	overflow: visible;
+}
 .page.arrangement {
 	background: url('../img/arrangement.png') no-repeat top left;
 	background-size: cover;
