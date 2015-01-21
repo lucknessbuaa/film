@@ -268,10 +268,10 @@ input[type=checkbox] {
 	width: 100%;
 	font-size: 12px;
 }
-
-.dtpicker-twoButtons .dtpicker-buttonSet {
-	float: right !important;
-}
-.dtpicker-twoButtons .dtpicker-buttonClear {
-	float: left !important;
+.debug {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	color: black;
 }

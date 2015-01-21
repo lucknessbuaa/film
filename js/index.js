@@ -272,33 +272,66 @@ $(function(){
 		return event.originalEvent.pageY || event.originalEvent.targetTouches[0].pageY;
 	}
 
+	function debug(text) {
+		console.log(text);
+		console.log(offset);
+		var content = text+'##'+offset+'####'+Math.random();
+		// $('.debug').text(content);
+
+		if ($('.current').hasClass('long')) {
+			if (text == 'exclude') {
+				// $('.debug').text($('.current').attr('class'));
+			}
+			// $('.debug').text(text+'=>'+started+'#startY '+startY+'#offsetY '+offsetY+'#offset '+offset);
+		}
+	}
+
+	function march($target, actions) {
+		for (var i = 0; i < actions.length; i++) {
+			var action = actions[i];
+			try {
+				switch (action) {
+					case 'focus':
+					case 'blur':
+					case 'click':
+						$target[0][action]();
+						break;
+					case 'mousedown':
+					case 'mouseup':
+						$target.trigger(action);
+						break;
+					default:
+						console.log('i know nothing');
+				}
+			} catch (e) {
+				console.log(action+" is not supported");
+			}
+		}
+	}
+
 	function touchExclude(event) {
+		debug('exclude');
 		if (!$(event.target).hasClass('audio')) {
 			initIOSAudio();
 		}
 		// event.preventDefault();
 		// event.stopPropagation();
-		if ($(event.target).hasClass('time')) {
+		var $target = $(event.target);
+		if ($target.hasClass('time')) {
 			$('.xdsoft_datetimepicker').hide();
-			$(event.target)[0].focus();
-			$(event.target)[0].blur();
+			march($target, ['focus', 'blur']);
 		} else if ($('.current').hasClass('long')) {
-			$(event.target)[0].focus();
-			$(event.target).trigger('mousedown');
-			$(event.target).trigger('mouseup');
-			$(event.target)[0].click();
+			march($target, ['focus', 'mousedown', 'mouseup', 'click']);
 			return true;
 		} else {
-			$(event.target).trigger('mousedown');
-			$(event.target).trigger('mouseup');
-			$(event.target)[0].click();
+			march($target, ['mousedown', 'mouseup', 'click']);
 		}
 		return false;
 	}
 
 	function onTouchStart(event) {
+		debug('start');
 		$('.xdsoft_datetimepicker').hide();
-		console.log('start');
 		event.preventDefault();
 		initIOSAudio();
 		if (!started) {
@@ -308,7 +341,7 @@ $(function(){
 	}
 
 	function onTouchMove(event) {
-		console.log('move');
+		debug('move');
 		event.preventDefault();
 		if (!started) { return false; }
 		var curY = getCurY(event);
@@ -325,11 +358,10 @@ $(function(){
 		if (curY<=0) {
 			onTouchEnd(event);
 		}
-		console.debug(offset);
 	}
 
 	function onTouchEnd(event) {
-		console.log('end');
+		debug('end');
 		event.preventDefault();
 		if (!started) { return false; }
 		var current = $('.current');
