@@ -73,7 +73,7 @@ $(function(){
 		loadHoliday();
 		height = $('.pagewrapper').height();
 
-		$('a, input.time, .page label, div.audio, #SOHUCS').on('touchstart MSPointerDown', touchExclude);
+		$('a, input.time, .page label, div.audio, .long').on('touchstart MSPointerDown', touchExclude);
 		$('input.time').on('change', refreshTip);
 		$('.page').on('touchstart MSPointerDown', onTouchStart);
 		$('.page').on('touchmove MSPointerMove', onTouchMove);
@@ -282,7 +282,7 @@ $(function(){
 			$('.xdsoft_datetimepicker').hide();
 			$(event.target)[0].focus();
 			$(event.target)[0].blur();
-		} else if ($(event.target).parents('#SOHUCS').length) {
+		} else if ($('.current').hasClass('long')) {
 			$(event.target)[0].focus();
 			$(event.target).trigger('mousedown');
 			$(event.target).trigger('mouseup');
@@ -349,6 +349,7 @@ $(function(){
 		}
 		if (current.hasClass('holiday') && !total) { next = current; flag = 1; }
 		if (current.hasClass('long')) {
+			if ($('#ds-wrapper').length) { next = current; }
 			if (offset < 0 && (height - offset) <= current.height()) {
 				started = 0;
 				return;
@@ -356,7 +357,9 @@ $(function(){
 				next = current;
 				var temp = current.height() - height;
 				var indexFix = temp > 0 ? temp / height : 0;
-				if (indexFix) { offset = -temp; }
+				if (indexFix) {
+					offset = - height * Math.floor(indexFix * 100) / 100;
+				}
 			}
 		}
 
@@ -372,7 +375,7 @@ $(function(){
 			updateAllTime();
 		}
 		$('.pagewrapper').animate({
-			top: -Math.ceil(index*100)+'%'
+			top: -Math.floor(index*100)+'%'
 		}, 'fast', function(){
 			next.animate({'opacity':1});
 			current.css('opacity',1);
