@@ -73,13 +73,13 @@ $(function(){
 		loadHoliday();
 		height = $('.pagewrapper').height();
 
-		$('a, input.time, .page label, .xdsoft_datetimepicker, div.audio').on('touchstart MSPointerDown', touchExclude);
+		$('a, input.time, .page label, div.audio, #SOHUCS').on('touchstart MSPointerDown', touchExclude);
 		$('input.time').on('change', refreshTip);
-		$(document).on('touchstart MSPointerDown', onTouchStart);
-		$(document).on('touchmove MSPointerMove', onTouchMove);
-		$(document).on('touchend MSPointerUp', onTouchEnd);
-		$(document).on('touchcancel MSPointerCancel', onTouchEnd);
-		$(document).on('touchleave MSPointerOut', onTouchEnd);
+		$('.page').on('touchstart MSPointerDown', onTouchStart);
+		$('.page').on('touchmove MSPointerMove', onTouchMove);
+		$('.page').on('touchend MSPointerUp', onTouchEnd);
+		$('.page').on('touchcancel MSPointerCancel', onTouchEnd);
+		$('.page').on('touchleave MSPointerOut', onTouchEnd);
 	}
 
 	function initTrack() {
@@ -276,19 +276,23 @@ $(function(){
 		if (!$(event.target).hasClass('audio')) {
 			initIOSAudio();
 		}
-		if (!$(event.target).parents('.xdsoft_datetimepicker').length) {
-			$('.xdsoft_datetimepicker').hide();
-		}
+		// event.preventDefault();
+		// event.stopPropagation();
 		if ($(event.target).hasClass('time')) {
+			$('.xdsoft_datetimepicker').hide();
 			$(event.target)[0].focus();
 			$(event.target)[0].blur();
+		} else if ($(event.target).parents('#SOHUCS').length) {
+			$(event.target)[0].focus();
+			$(event.target).trigger('mousedown');
+			$(event.target).trigger('mouseup');
+			$(event.target)[0].click();
+			return true;
 		} else {
 			$(event.target).trigger('mousedown');
 			$(event.target).trigger('mouseup');
 			$(event.target)[0].click();
 		}
-		event.preventDefault();
-		event.stopPropagation();
 		return false;
 	}
 
@@ -334,6 +338,12 @@ $(function(){
 		}
 
 		if (offsetY < 0) {
+			// if ($(event.target).parents('.page').hasClass('long')) {
+			// 	started = 0;
+			// 	startY = 0;
+			// 	offset = 0;
+			// 	return;
+			// }
 			next = current.next('.page');
 			next = next.length === 1 ? next : current;
 		} else if (offsetY > 0) {

@@ -68,6 +68,9 @@ html, body {
 	overflow: hidden;
 	box-sizing: border-box;
 }
+/*.page.long {
+	overflow: initial;
+}*/
 .page.arrangement {
 	background: url('../img/arrangement.png') no-repeat top left;
 	background-size: cover;
@@ -214,20 +217,20 @@ span.small {
 input[type=checkbox] {
 	display: none;
 }
-label {
+.arrangement label {
 	padding: 15px 20px 10px;
 	background: url('../img/bubble.png') no-repeat center;
 	background-size: 100% 100%;
 }
-label.checked {
+.arrangement label.checked {
 	background: url('../img/bubble_checked.png') no-repeat center;
 	background-size: 100% 100%;
 }
-label#blabla {
+.arrangement label#blabla {
 	background: url('../img/bubble_bla.png') no-repeat center;
 	background-size: 100% 100%;
 }
-label#blabla.checked {
+.arrangement label#blabla.checked {
 	background: url('../img/bubble_bla_checked.png') no-repeat center;
 	background-size: 100% 100%;
 }
