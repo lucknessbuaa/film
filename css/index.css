@@ -176,6 +176,8 @@ input.time.end {
 	vertical-align: middle;
 }
 .number {
+	display: inline-block;
+	width: 35px;
 	padding: 7px;
 	color: #f2eea4;
 	font-size: 60px;
