@@ -223,7 +223,8 @@ input[type=checkbox] {
 	display: none;
 }
 .arrangement label {
-	padding: 15px 20px 10px;
+	position: relative;
+	padding: 15px 17px 10px;
 	background: url('../img/bubble.png') no-repeat center;
 	background-size: 100% 100%;
 }
@@ -239,6 +240,32 @@ input[type=checkbox] {
 	background: url('../img/bubble_bla_checked.png') no-repeat center;
 	background-size: 100% 100%;
 }
+.arrangement label::before {
+	content: '';
+	background: url('../img/checkbox.png') no-repeat center;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: absolute;
+	top: 42%;
+	left: -17px;
+	width: 15px;
+	height: 15px;
+}
+.arrangement label.checked::before {
+	content: '';
+	background: url('../img/checkbox_checked.png') no-repeat center;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: absolute;
+	top: 42%;
+	left: -17px;
+	width: 15px;
+	height: 15px;
+}
+.subject {
+	color: #f2eea4;
+	margin: -5px 0 5px;
+}
 .section {
 	z-index: 2;
 	text-align: center;
@@ -251,11 +278,11 @@ input[type=checkbox] {
 	width: 34%;
 	white-space: nowrap;
 	float: left;
+	margin-left: 18px;
 	margin-bottom: 30px;
 }
 .own {
 	float: right;
-	margin-right: 3%;
 	margin-bottom: 30px;
 }
 .arrangement .info {
@@ -274,4 +301,10 @@ input[type=checkbox] {
 	left: 0;
 	z-index: 10000;
 	color: black;
+}
+.ds-post-report, .ds-post-delete, .ds-post-repost {
+	display: none !important;
+}
+div.ds-replybox form {
+	width: 98% !important;
 }

@@ -14,8 +14,8 @@ $(function(){
 		},
 		friends: {
 			kinsman: {freq: 5, time: 8, name: '串亲戚'},
+			blabla: {freq: 7, time: 4, name: '陪七大姑聊人生'},
 			date: {freq: 4, time: 12, name: '相亲'},
-			blabla: {freq: 7, time: 4, name: '陪七大姑聊人生'}
 		},
 		own: {
 			mobile: {freq: 1, time: 5, name: '手机党'},
@@ -80,6 +80,13 @@ $(function(){
 		$('.page').on('touchend MSPointerUp', onTouchEnd);
 		$('.page').on('touchcancel MSPointerCancel', onTouchEnd);
 		$('.page').on('touchleave MSPointerOut', onTouchEnd);
+		if (parseInt(localStorage.end)) { toEnd(); }
+	}
+
+	function toEnd() {
+		var index = $('.page').index($('.long'));
+		$('.pagewrapper').css({top: -index+'00%'});
+		localStorage.end = 0;
 	}
 
 	function initTrack() {
@@ -93,11 +100,6 @@ $(function(){
 				muteAudio();
 			}
 		});
-		if (!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
-			audio.autoplay = true;
-			$('div.audio').eq(0).click();
-			played = 1;
-		}
 	}
 
 	function playAudio() {
@@ -110,11 +112,18 @@ $(function(){
 		$('div.audio').addClass('mute');
 	}
 
-	function initIOSAudio() {
-		if (!played && /(iPad|iPhone|iPod)/g.test(navigator.userAgent)) {
+	function initAudio() {
+		if (!played) {
 			$('div.audio').eq(0).click();
 			played = 1;
 		}
+	}
+
+	function autoSelect() {
+		var selections = [];
+		$.each(selections, function(index, value) {
+			$('#'+value).trigger('click');
+		});
 	}
 
 	function initArrangements() {
@@ -126,6 +135,7 @@ $(function(){
 				$item.appendTo($(el));
 			}
 		});
+		autoSelect();
 	}
 
 	function refreshAttendant() {
@@ -311,9 +321,6 @@ $(function(){
 
 	function touchExclude(event) {
 		debug('exclude');
-		if (!$(event.target).hasClass('audio')) {
-			initIOSAudio();
-		}
 		// event.preventDefault();
 		// event.stopPropagation();
 		var $target = $(event.target);
@@ -333,7 +340,6 @@ $(function(){
 		debug('start');
 		$('.xdsoft_datetimepicker').hide();
 		event.preventDefault();
-		initIOSAudio();
 		if (!started) {
 			startY = getCurY(event);
 			started = 1;
@@ -401,11 +407,16 @@ $(function(){
 		}
 		current.removeClass('current');
 		next.addClass('current');
+		localStorage.end = 0;
 		if (next.hasClass('result')) {
 			updateRemain();
 		} else if (next.hasClass('arrangement')) {
+			initAudio();
 			updateAllTime();
+		} else if (next.hasClass('long')) {
+			localStorage.end = 1;
 		}
+
 		$('.pagewrapper').animate({
 			top: -Math.floor(index*100)+'%'
 		}, 'fast', function(){
