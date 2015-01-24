@@ -69,6 +69,7 @@ html, body {
 	box-sizing: border-box;
 }
 .page.long {
+	font-family: Helvetica, sans-serif;
 	background: white;
 	min-height: 100%;
 	height: auto;
