@@ -9,7 +9,7 @@ $(function(){
 		classmates: {
 			party: {freq: 7, time: 5, name: '聚会'},
 			KTV: {freq: 7, time: 5, name: 'KTV'},
-			travel: {freq: 7, time: 6, name: '出游'},
+			travel: {freq: 7, time: 6, name: '看电影'},
 			shopping: {freq: 7, time: 8, name: '逛街'}
 		},
 		friends: {
@@ -120,7 +120,7 @@ $(function(){
 	}
 
 	function autoSelect() {
-		var selections = [];
+		var selections = ['party', 'kinsman'];
 		$.each(selections, function(index, value) {
 			$('#'+value).trigger('click');
 		});

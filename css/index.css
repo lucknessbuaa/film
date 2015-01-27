@@ -309,3 +309,6 @@ input[type=checkbox] {
 div.ds-replybox form {
 	width: 98% !important;
 }
+.ds-powered-by {
+	display: none;
+}
