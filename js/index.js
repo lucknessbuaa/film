@@ -32,33 +32,14 @@ $(function(){
 	function init() {
 		$('.page').eq(0).addClass('current');
 
-		$('input.time#start').datetimepicker({
-			lang: 'zh',
-			format: 'Y-m-d',
-			timepicker: false,
-			closeOnDateSelect: true,
-			minDate: 0,
-			maxDate: '2015-03-31',
-			formatDate: 'Y-m-d',
-			onShow: function(ct) {
-				this.setOptions({
-					maxDate: $('#end').val() ? $('#end').val() : '2015-03-31'
-				})
-			}
-		});
 		$('input.time#end').datetimepicker({
 			lang: 'zh',
 			format: 'Y-m-d',
 			timepicker: false,
 			closeOnDateSelect: true,
 			minDate: 0,
-			maxDate: '2015-03-31',
-			formatDate: 'Y-m-d',
-			onShow: function(ct) {
-				this.setOptions({
-					minDate: $('#start').val() ? $('#start').val() : 0
-				})
-			}
+			maxDate: '2015-02-28',
+			formatDate: 'Y-m-d'
 		});
 		$('.time').change(function(event) {
 			updateTotal();
@@ -212,10 +193,11 @@ $(function(){
 	}
 
 	function updateTotal() {
-		var start = Date.parse($('#start').val()) || 0;
+		var start = new Date();
 		var end = Date.parse($('#end').val()) || 0;
-		if (start && end && end>=start) {
-			total = (end - start) / (24*60*60*1000) + 1;
+		if (end) { end += 24 * 3600000 + start.getTimezoneOffset() * 60000; }
+		if (end && end>=start) {
+			total = Math.ceil((end - start) / (24*60*60*1000));
 		} else {
 			total = 0;
 		}

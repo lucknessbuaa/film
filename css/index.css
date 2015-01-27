@@ -147,7 +147,7 @@ input.time {
 	color: #F6C4C4;
 	/*background-color: rgba(0,0,0,0);*/
 	background-color: #E15253;
-	width: 38%;
+	width: 75%;
 	font-size: 14px;
 	padding: 8px 6px;
 	margin: 5px;
@@ -161,12 +161,6 @@ input.time.tip {
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	border: 1px rgba(0,0,0,0.5) solid;
-}
-input.time.start {
-	float: left;
-}
-input.time.end {
-	float: right;
 }
 .statistic, .remain {
 	clear: both;
