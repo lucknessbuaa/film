@@ -174,8 +174,14 @@ $(function(){
 		setTimeout(function() {$('.children_0').addClass('fadein').show();}, 2000);
 		setTimeout(function() {$('.parents_0').addClass('fadein').show();}, 2500);
 
-		setTimeout(function() {$('.flipboard.left').addClass('flip').show();}, 3000);
-		setTimeout(function() {$('.flipboard.right').addClass('flip').show();}, 3500);
+		var exchangeUpDown = function($el) {
+			var $up = $el.find('.up');
+			var $down = $el.find('.down');
+			$up.removeClass('up').addClass('down');
+			$down.removeClass('down').addClass('up');
+		};
+		setTimeout(function() {$('.flipboard.left').addClass('flip').show(); exchangeUpDown($('.flipboard.left'))}, 3000);
+		setTimeout(function() {$('.flipboard.right').addClass('flip').show(); exchangeUpDown($('.flipboard.right'))}, 3500);
 	}
 
 	function loadFilm() {
