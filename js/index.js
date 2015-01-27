@@ -9,13 +9,13 @@ $(function(){
 		classmates: {
 			party: {freq: 7, time: 5, name: '聚会'},
 			KTV: {freq: 7, time: 5, name: 'KTV'},
-			travel: {freq: 7, time: 6, name: '看电影'},
+			film: {freq: 7, time: 6, name: '看电影'},
 			shopping: {freq: 7, time: 8, name: '逛街'}
 		},
 		friends: {
 			kinsman: {freq: 5, time: 8, name: '串亲戚'},
 			blabla: {freq: 7, time: 4, name: '陪七大姑聊人生'},
-			date: {freq: 4, time: 12, name: '相亲'},
+			date: {freq: 7, time: 8, name: '相亲'},
 		},
 		own: {
 			mobile: {freq: 1, time: 5, name: '手机党'},
@@ -54,7 +54,7 @@ $(function(){
 		loadHoliday();
 		height = $('.pagewrapper').height();
 
-		$('a, input.time, .page label, div.audio, .long').on('touchstart MSPointerDown', touchExclude);
+		$('a, input.time, .page label, div.audio, .film textarea, .long').on('touchstart MSPointerDown', touchExclude);
 		$('input.time').on('change', refreshTip);
 		$('.page').on('touchstart MSPointerDown', onTouchStart);
 		$('.page').on('touchmove MSPointerMove', onTouchMove);
@@ -313,7 +313,7 @@ $(function(){
 			march($target, ['focus', 'mousedown', 'mouseup', 'click']);
 			return true;
 		} else {
-			march($target, ['mousedown', 'mouseup', 'click']);
+			march($target, ['focus', 'mousedown', 'mouseup', 'click']);
 		}
 		return false;
 	}

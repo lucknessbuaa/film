@@ -75,6 +75,10 @@ html, body {
 	height: auto;
 	overflow: visible;
 }
+.page.holiday {
+	background: url('../img/holiday.png') no-repeat top left;
+	background-size: cover;
+}
 .page.arrangement {
 	background: url('../img/arrangement.png') no-repeat top left;
 	background-size: cover;
@@ -128,16 +132,14 @@ img.cinima {
 	bottom: 20%;
 }
 img.film_ticket {
-	bottom: 54%;
+	bottom: 20%;
 }
 img.blurin {
 	-webkit-animation: blurin 0.3s ease;
 	animation: blurin 0.3s ease;
 }
 div.startend {
-	margin-top: 40%;
-}
-div.startend {
+	margin-top: 30%;
 	text-align: center;
 	height: 44px;
 	line-height: 44px;
@@ -191,6 +193,37 @@ input.time.tip {
 span.small {
 	font-size: 15px;
 }
+span.middle {
+	font-size: 17px;
+}
+div.info.no-mt {
+	margin-top: 0;
+}
+div.info.no-mb {
+	margin-bottom: 0;
+}
+.film textarea {
+	color: #bf3a3b;
+	display: block;
+	font-size: 14px;
+	width: 60%;
+	height: 80px;
+	margin: 20% auto 0;
+	padding: 14px;
+	border: none;
+	outline: none;
+	background: url('../img/speech.png') no-repeat center;
+	background-size: 100% 100%;
+}
+.sharewrapper::after {
+	content: '48个字以内';
+	color: #909090;
+	position: absolute;
+	right: 20%;
+	margin-top: -30px;
+	z-index: 9;
+	font-size: 14px;
+}
 .link {
 	position: absolute;
 	bottom: 7%;
@@ -203,7 +236,7 @@ span.small {
 	border: 1px #f2eea4 solid;
 	border-radius: 25px;
 	text-decoration: none;
-	padding: 10px 20px;
+	padding: 10px 35px;
 }
 .attendant {
 	opacity: 0;
