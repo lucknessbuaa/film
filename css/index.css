@@ -171,10 +171,6 @@ div.audio.mute {
 .hide {
 	display: none;
 }
-.flip {
-	-webkit-animation: flip 0.5s ease !important;
-	animation: flip 0.5s ease !important;
-}
 .flipboard {
 	position: absolute;
 	width: 100%;
@@ -193,6 +189,18 @@ div.audio.mute {
     transform: rotateY(0deg) !important;
 }
 .down {
+	-webkit-transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) !important;
+}
+.flip .down {
+	-webkit-transition: transform 0.5s ease;
+	transition: transform 0.5s ease;
+	-webkit-transform: rotateY(0deg) !important;
+    transform: rotateY(0deg) !important;
+}
+.flip .up {
+	-webkit-transition: transform 0.5s ease;
+	transition: transform 0.5s ease;
 	-webkit-transform: rotateY(180deg) !important;
     transform: rotateY(180deg) !important;
 }

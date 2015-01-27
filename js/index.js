@@ -137,7 +137,7 @@ $(function(){
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
 		$('.fadein').removeClass('fadein').hide();
-		$('.flip').removeClass('flip').hide();
+		$('.flip').removeClass('flip');
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
 		} else if ($page.hasClass('result')) {
@@ -174,14 +174,8 @@ $(function(){
 		setTimeout(function() {$('.children_0').addClass('fadein').show();}, 2000);
 		setTimeout(function() {$('.parents_0').addClass('fadein').show();}, 2500);
 
-		var exchangeUpDown = function($el) {
-			var $up = $el.find('.up');
-			var $down = $el.find('.down');
-			$up.removeClass('up').addClass('down');
-			$down.removeClass('down').addClass('up');
-		};
-		setTimeout(function() {$('.flipboard.left').addClass('flip').show(); exchangeUpDown($('.flipboard.left'))}, 3000);
-		setTimeout(function() {$('.flipboard.right').addClass('flip').show(); exchangeUpDown($('.flipboard.right'))}, 3500);
+		setTimeout(function() {$('.flipboard.left').addClass('flip');}, 3000);
+		setTimeout(function() {$('.flipboard.right').addClass('flip');}, 3500);
 	}
 
 	function loadFilm() {
