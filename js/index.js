@@ -136,6 +136,8 @@ $(function(){
 	function refreshPage($page) {
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
+		$('.slipup').removeClass('slipup').hide();
+		$('.sliplb').removeClass('sliplb').hide();
 		$('.fadein').removeClass('fadein').hide();
 		$('.flip').removeClass('flip');
 		if ($page.hasClass('holiday')) {
@@ -163,8 +165,11 @@ $(function(){
 	}
 
 	function loadHoliday() {
-		setTimeout(function() {$('img.ticket').addClass('blurin').show();}, 500);
-		$('img.title').addClass('slipin').show();
+		setTimeout(function() {$('img.title').addClass('slipin').show();}, 500);
+		setTimeout(function() {$('.endinput').addClass('slipin').show();}, 1000);
+		setTimeout(function() {$('.statistic').addClass('slipin').show();}, 1500);
+		setTimeout(function() {$('.people').addClass('slipup').show();}, 2000);
+		setTimeout(function() {$('.ticket').addClass('sliplb').show();}, 2500);
 	}
 
 	function loadResult() {
