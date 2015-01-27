@@ -135,6 +135,7 @@ $(function(){
 
 	function refreshPage($page) {
 		$('.blurin').removeClass('blurin').hide();
+		$('.slipin').removeClass('slipin').hide();
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
 		} else if ($page.hasClass('result')) {
@@ -161,12 +162,14 @@ $(function(){
 
 	function loadHoliday() {
 		setTimeout(function() {$('img.ticket').addClass('blurin').show();}, 500);
-		$('img.title').addClass('blurin').show();
+		$('img.title').addClass('slipin').show();
 	}
 
 	function loadResult() {
-		setTimeout(function() {$('img.parents').addClass('blurin').show();}, 500);
-		$('img.children').addClass('blurin').show();
+		setTimeout(function() {$('.above-remain').addClass('slipin').show();}, 500);
+		setTimeout(function() {$('.remain').addClass('slipin').show();}, 1000);
+		setTimeout(function() {$('.below-remain').addClass('slipin').show();}, 1500);
+		// $('img.children').addClass('blurin').show();
 	}
 
 	function loadFilm() {

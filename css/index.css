@@ -2,10 +2,31 @@
     font-family: modifiedFont;
     src: url('../font/m.ttf');
 }
+@-webkit-keyframes slipin {
+	from {
+		opacity: 0;
+		margin-top: -10%;
+	}
+	to {
+		opacity: 1;
+		margin-top: 0;
+	}
+}
+@keyframes slipin {
+	from {
+		opacity: 0;
+		margin-top: -10%;
+	}
+	to {
+		opacity: 1;
+		margin-top: 0;
+	}
+}
 @-webkit-keyframes blurin {
 	from {
 		-webkit-filter: blur(10px);
 		filter: blur(10px);
+		opacity: 0;
 		width: 140%;
 		margin-left: -20%;
 		margin-top: -10%;
@@ -13,6 +34,7 @@
 	to {
 		-webkit-filter: blur(0);
 		filter: blur(0);
+		opacity: 1;
 		width: 100%;
 		margin-left: 0;
 		margin-top: 0;
@@ -21,12 +43,14 @@
 @keyframes blurin {
 	from {
 		filter: blur(10px);
+		opacity: 0;
 		width: 140%;
 		margin-left: -20%;
 		margin-top: -10%;
 	}
 	to {
 		filter: blur(0);
+		opacity: 1;
 		width: 100%;
 		margin-left: 0;
 		margin-top: 0;
@@ -134,9 +158,13 @@ img.cinima {
 img.film_ticket {
 	bottom: 20%;
 }
-img.blurin {
-	-webkit-animation: blurin 0.3s ease;
-	animation: blurin 0.3s ease;
+.slipin {
+	-webkit-animation: slipin 0.5s ease;
+	animation: slipin 0.5s ease;
+}
+.blurin {
+	-webkit-animation: blurin 0.5s ease;
+	animation: blurin 0.5s ease;
 }
 div.startend {
 	margin-top: 30%;
