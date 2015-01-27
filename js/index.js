@@ -136,6 +136,8 @@ $(function(){
 	function refreshPage($page) {
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
+		$('.fadein').removeClass('fadein').hide();
+		$('.flip').removeClass('flip').hide();
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
 		} else if ($page.hasClass('result')) {
@@ -169,7 +171,11 @@ $(function(){
 		setTimeout(function() {$('.above-remain').addClass('slipin').show();}, 500);
 		setTimeout(function() {$('.remain').addClass('slipin').show();}, 1000);
 		setTimeout(function() {$('.below-remain').addClass('slipin').show();}, 1500);
-		// $('img.children').addClass('blurin').show();
+		setTimeout(function() {$('.children_0').addClass('fadein').show();}, 2000);
+		setTimeout(function() {$('.parents_0').addClass('fadein').show();}, 2500);
+
+		setTimeout(function() {$('.flipboard.left').addClass('flip').show();}, 3000);
+		setTimeout(function() {$('.flipboard.right').addClass('flip').show();}, 3500);
 	}
 
 	function loadFilm() {
