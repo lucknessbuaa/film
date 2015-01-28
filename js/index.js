@@ -1,17 +1,13 @@
-/*
-onTouchStart 处理滑动开始
-onTouchMove 处理滑动过程
-onTouchEnd 处理滑动结束
+$(function() {
+	/*
+	onTouchStart 处理滑动开始
+	onTouchMove 处理滑动过程
+	onTouchEnd 处理滑动结束
 
-refreshPage 处理滑动页面的刷新
-loadXXX 处理页面加载（holiday 第一页，arrangement 第二页，result 第三页，film 第四页
+	refreshPage 处理滑动页面的刷新
+	loadXXX 处理页面加载（holiday 第一页，arrangement 第二页，result 第三页，film 第四页
+	*/
 
-
-*/
-
-
-
-$(function(){
 	var height = 0;
 	var started = 0;
 	var startY = 0;
@@ -20,20 +16,60 @@ $(function(){
 	var total = 0;
 	var config = {
 		classmates: {
-			party: {freq: 7, time: 5, name: '聚会'},
-			KTV: {freq: 7, time: 5, name: 'KTV'},
-			film: {freq: 7, time: 6, name: '看电影'},
-			shopping: {freq: 7, time: 8, name: '逛街'}
+			party: {
+				freq: 7,
+				time: 5,
+				name: '聚会'
+			},
+			KTV: {
+				freq: 7,
+				time: 5,
+				name: 'KTV'
+			},
+			film: {
+				freq: 7,
+				time: 6,
+				name: '看电影'
+			},
+			shopping: {
+				freq: 7,
+				time: 8,
+				name: '逛街'
+			}
 		},
 		friends: {
-			kinsman: {freq: 5, time: 8, name: '串亲戚'},
-			blabla: {freq: 7, time: 4, name: '陪七大姑聊人生'},
-			date: {freq: 7, time: 8, name: '相亲'},
+			kinsman: {
+				freq: 5,
+				time: 8,
+				name: '串亲戚'
+			},
+			blabla: {
+				freq: 7,
+				time: 4,
+				name: '陪七大姑聊人生'
+			},
+			date: {
+				freq: 7,
+				time: 8,
+				name: '相亲'
+			},
 		},
 		own: {
-			mobile: {freq: 1, time: 5, name: '手机党'},
-			sleep: {freq: 1, time: 8, name: '睡眠'},
-			traffic: {freq: 0, time: 30, name: '春运'}
+			mobile: {
+				freq: 1,
+				time: 5,
+				name: '手机党'
+			},
+			sleep: {
+				freq: 1,
+				time: 8,
+				name: '睡眠'
+			},
+			traffic: {
+				freq: 0,
+				time: 30,
+				name: '春运'
+			}
 		}
 	};
 	var tpl = '<div class="item"><label id="$type"><input type="checkbox" class="$type" data-type="$subject">$name<span></span></label></div>';
@@ -76,19 +112,23 @@ $(function(){
 		$('.page').on('touchend MSPointerUp', onTouchEnd);
 		$('.page').on('touchcancel MSPointerCancel', onTouchEnd);
 		$('.page').on('touchleave MSPointerOut', onTouchEnd);
-		if (parseInt(localStorage.end)) { toEnd(); }
+		if (parseInt(localStorage.end)) {
+			toEnd();
+		}
 	}
 
 	function toEnd() {
 		var index = $('.page').index($('.long'));
-		$('.pagewrapper').css({top: -index+'00%'});
+		$('.pagewrapper').css({
+			top: -index + '00%'
+		});
 		localStorage.end = 0;
 	}
 
 	function initTrack() {
 		audio = document.getElementById('bgAudio');
 		audio.loop = true;
-		$('div.audio').click(function(event){
+		$('div.audio').click(function(event) {
 			var $el = $(event.target);
 			if ($el.hasClass('mute')) {
 				playAudio();
@@ -118,14 +158,16 @@ $(function(){
 	function autoSelect() {
 		var selections = ['party', 'kinsman'];
 		$.each(selections, function(index, value) {
-			$('#'+value).trigger('click');
+			$('#' + value).trigger('click');
 		});
 	}
 
 	function initArrangements() {
 		$('.arrangement .section').each(function(index, el) {
 			var subject = $(el).attr('class').replace('section', '').trim();
-			if (!(subject in config)) { return; }
+			if (!(subject in config)) {
+				return;
+			}
 			for (var item in config[subject]) {
 				var $item = $(tpl.replace(/\$subject/g, subject).replace(/\$type/g, item).replace(/\$name/g, config[subject][item]['name']));
 				$item.appendTo($(el));
@@ -142,7 +184,7 @@ $(function(){
 					$('.count').text(ret.Joinnum);
 					$('.attendant').css('opacity', 1);
 				}
-			} catch(e) {
+			} catch (e) {
 				console.log('cannot get joinnum');
 			}
 		});
@@ -184,16 +226,28 @@ $(function(){
 
 	function showTip() {
 		$('input.time').each(function(index, el) {
-			if ($(el).val().trim() == '') { $(el).addClass('tip'); }
+			if ($(el).val().trim() == '') {
+				$(el).addClass('tip');
+			}
 		});
 	}
 
 	function loadHoliday() {
-		setTimeout(function() {$('img.title').addClass('blurin').show();}, 100);
-		setTimeout(function() {$('.endinput').addClass('slipin').show();}, 300);
-		setTimeout(function() {$('.statistic').addClass('slipin').show();}, 800);
-		setTimeout(function() {$('.people').addClass('slipup').show();}, 1300);
-		setTimeout(function() {$('.ticket').addClass('sliplb').show();}, 1800);
+		setTimeout(function() {
+			$('img.title').addClass('blurin').show();
+		}, 100);
+		setTimeout(function() {
+			$('.endinput').addClass('slipin').show();
+		}, 300);
+		setTimeout(function() {
+			$('.statistic').addClass('slipin').show();
+		}, 800);
+		setTimeout(function() {
+			$('.people').addClass('slipup').show();
+		}, 1300);
+		setTimeout(function() {
+			$('.ticket').addClass('sliplb').show();
+		}, 1800);
 	}
 
 	function loadResult() {
@@ -228,6 +282,59 @@ $(function(){
 
 	function loadFilm() {
 		$('img.film_ticket').addClass('blurin').show();
+		$('.film .wrapper, .film .guide span').css('opacity', 0).show();
+		async.parallel([
+			function(callback) {
+				$('.guide span.first').velocity({
+					opacity: 1,
+				}, {
+					duration: 1000,
+					complete: function() {
+						console.log('first complete');
+						callback(null);
+					}
+				});
+			},
+			function(callback) {
+				$('.guide span.second').velocity({
+					opacity: 1
+				}, {
+					duration: 1000,
+					delay: 500,
+					complete: function() {
+						console.log('second complete');
+						callback(null);
+					}
+				});
+			},
+			function(callback) {
+				$('.guide span.third').velocity({
+					opacity: 1
+				}, {
+					duration: 1000,
+					delay: 1000,
+					complete: function() {
+						console.log('third complete');
+						callback(null);
+					}
+				});
+			}
+		], function() {
+			$('.guide span').velocity({
+				opacity: 0
+			}, {
+				display: 'none',
+				duration: 1000,
+				delay: 500,
+				complete: function() {
+					$('.wrapper').velocity({
+						opacity: 1
+					}, {
+						duration: 1000
+					});
+				}
+			});
+		});
 	}
 
 	function updateNumber(number, $el, nozero) {
@@ -239,11 +346,11 @@ $(function(){
 			return;
 		}
 		var low = number % 10;
-		var high = ((number-low)/10) % 10;
+		var high = ((number - low) / 10) % 10;
 		$low.text(low).removeClass('zero');
 		$high.text(high);
-		if (high || nozero) { 
-			$high.removeClass('zero'); 
+		if (high || nozero) {
+			$high.removeClass('zero');
 		} else {
 			$high.addClass('zero');
 		}
@@ -252,9 +359,11 @@ $(function(){
 	function updateTotal() {
 		var start = new Date();
 		var end = Date.parse($('#end').val()) || 0;
-		if (end) { end += 24 * 3600000 + start.getTimezoneOffset() * 60000; }
-		if (end && end>=start) {
-			total = Math.ceil((end - start) / (24*60*60*1000));
+		if (end) {
+			end += 24 * 3600000 + start.getTimezoneOffset() * 60000;
+		}
+		if (end && end >= start) {
+			total = Math.ceil((end - start) / (24 * 60 * 60 * 1000));
 		} else {
 			total = 0;
 		}
@@ -276,7 +385,7 @@ $(function(){
 			} else {
 				cost = item['time'] || 0;
 			}
-			el.parent().find('span').text(' '+cost+'h').show();
+			el.parent().find('span').text(' ' + cost + 'h').show();
 		} else {
 			el.parent().find('span').text('').hide();
 		}
@@ -298,7 +407,7 @@ $(function(){
 		if (!total) {
 			updateNumber(0, $('.days'));
 			updateNumber(0, $('.hours'));
-			return; 
+			return;
 		}
 		var cost = 0;
 		var remain = 24 * total;
@@ -313,7 +422,9 @@ $(function(){
 		var days = (remain - hours) / 24;
 		updateNumber(days, $('.days'));
 		var nozero = 0;
-		if (total) { nozero = 1; }
+		if (total) {
+			nozero = 1;
+		}
 		updateNumber(hours, $('.hours'), nozero);
 	}
 
@@ -324,7 +435,7 @@ $(function(){
 	function debug(text) {
 		console.log(text);
 		console.log(offset);
-		var content = text+'##'+offset+'####'+Math.random();
+		var content = text + '##' + offset + '####' + Math.random();
 		// $('.debug').text(content);
 
 		if ($('.current').hasClass('long')) {
@@ -353,7 +464,7 @@ $(function(){
 						console.log('i know nothing');
 				}
 			} catch (e) {
-				console.log(action+" is not supported");
+				console.log(action + " is not supported");
 			}
 		}
 	}
@@ -388,22 +499,24 @@ $(function(){
 	function onTouchMove(event) {
 		debug('move');
 		event.preventDefault();
-		if (!started) { return false; }
+		if (!started) {
+			return false;
+		}
 		var curY = getCurY(event);
 		offsetY = curY - startY;
 		offset += offsetY;
 		startY = curY;
 		if (!($('.current').hasClass('result') && reloadResult != 2)) {
-			$(".pagewrapper").css('top', '+='+offsetY);
+			$(".pagewrapper").css('top', '+=' + offsetY);
 
 			if (!$('.current').hasClass('long')) {
-				var opacity = 0.9-Math.abs(offset)/height;
+				var opacity = 0.9 - Math.abs(offset) / height;
 				opacity = opacity < 0 ? 0 : opacity;
 				$(".current").css('opacity', opacity);
 			}
 		}
-		
-		if (curY<=0) {
+
+		if (curY <= 0) {
 			onTouchEnd(event);
 		}
 	}
@@ -411,7 +524,9 @@ $(function(){
 	function onTouchEnd(event) {
 		debug('end');
 		event.preventDefault();
-		if (!started) { return false; }
+		if (!started) {
+			return false;
+		}
 		var current = $('.current');
 		var next = current;
 		var flag = 0;
@@ -427,7 +542,11 @@ $(function(){
 			next = current.prev('.page');
 			next = next.length === 1 ? next : current;
 		}
-		if (current.hasClass('holiday') && !total) { next = current; flag = 1; }
+
+		if (current.hasClass('holiday') && !total) {
+			next = current;
+			flag = 1;
+		}
 		if (current.hasClass('result') && next.hasClass('film') && reloadResult != 2) {
 			next = current;
 			reloadResult = 1;
@@ -435,7 +554,9 @@ $(function(){
 			reloadResult = 0;
 		}
 		if (current.hasClass('long')) {
-			if ($('#ds-wrapper').length) { next = current; }
+			if ($('#ds-wrapper').length) {
+				next = current;
+			}
 			if (offset < 0 && (height - offset) <= current.height()) {
 				started = 0;
 				return;
@@ -444,9 +565,12 @@ $(function(){
 				var temp = current.height() - height;
 				var indexFix = temp > 0 ? temp / height : 0;
 				if (indexFix) {
-					offset = - height * Math.floor(indexFix * 100) / 100;
+					offset = -height * Math.floor(indexFix * 100) / 100;
 				}
 			}
+		} else if (current.hasClass('film') && !next.hasClass('film')) {
+			console.log('hide wrapper');
+			$('.film .wrapper').hide();
 		}
 
 		var index = $('.page').index(next);
@@ -466,10 +590,12 @@ $(function(){
 		}
 
 		$('.pagewrapper').animate({
-			top: -Math.floor(index*100)+'%'
-		}, 'fast', function(){
-			next.animate({'opacity':1});
-			current.css('opacity',1);
+			top: -Math.floor(index * 100) + '%'
+		}, 'fast', function() {
+			next.animate({
+				'opacity': 1
+			});
+			current.css('opacity', 1);
 			if (current != next) {
 				refreshPage(next, current);
 			} else {
@@ -488,3 +614,12 @@ $(function(){
 
 	init();
 });
+
+// wx.config({
+// 	debug: true,
+// 	appId: '',
+// 	timestamp: ,
+// 	nonceStr: '',
+// 	signature: '',
+// 	jsApiList: []
+// });
