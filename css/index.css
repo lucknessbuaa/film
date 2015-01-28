@@ -691,6 +691,18 @@ div.ds-replybox form {
 	padding: 20px;
 }
 
+@media (max-height: 420px) {
+	.sharewrapper {
+		position: absolute;
+		width: 100%;
+		top: 4%;
+		z-index: 9;
+	}
+	.film .wrapper textarea {
+		height: 45px;
+	}
+}
+
 .film .wrapper button.share{ 
 	background: url(../img/share.png) center center no-repeat transparent;
 	border: none;
