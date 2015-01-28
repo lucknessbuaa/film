@@ -197,6 +197,20 @@
     0%  {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
+@-webkit-keyframes 'opacityLight' {
+    from {
+        opacity: 0.8;
+        margin-bottom: -5px;
+    }
+    50% {
+        opacity: 1;
+        margin-bottom: 15px;
+    }
+    to {
+        opacity: 0.8;
+        margin-bottom: -5px;
+    }
+}
 html, body {
 	margin: 0;
 	padding: 0;
@@ -237,8 +251,7 @@ html, body {
 	background-size: cover;
 }
 .page.arrangement {
-	background: url('../img/arrangement.png') no-repeat top left;
-	background-size: cover;
+	background: #E15253;
 }
 .page:not(:last-child)::after {
 	content: '';
@@ -249,6 +262,10 @@ html, body {
 	bottom: 0;
 	background: url('../img/arrow.png') no-repeat center;
 	background-size: contain;
+    opacity: 0.8;
+    -webkit-animation-name: opacityLight;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
 }
 div.audio {
 	position: absolute;
@@ -547,7 +564,51 @@ input[type=checkbox] {
 	z-index: 2;
 	text-align: center;
 }
-.classmates {
+.arrangement .arrBg {
+    position: absolute;
+    background: url('../img/arrBg.png') no-repeat center top;
+    background-size: 100% 93%;
+    width: 100%;
+    top: 0px;
+    height: 100%;
+}
+.arrangement .arrCircle {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    background: url('../img/arrCircle.png') no-repeat;
+    background-size: 200px 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    height: 200px;
+    width: 200px;
+}
+.section.classmates {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+}
+.arrangement .info {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+    margin-top: -40px;
+}
+.section.friends {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+}
+.section.own {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+}
+/*.classmates {
 	margin-top: 20px;
 	width: 100%;
 }
@@ -571,7 +632,7 @@ input[type=checkbox] {
 	position: absolute;
 	width: 100%;
 	font-size: 12px;
-}
+}*/
 .debug {
 	position: fixed;
 	top: 0;

@@ -96,6 +96,7 @@ $(function() {
 			updateTotal();
 		});
 		initArrangements();
+        clear1Arrangements();
 		refreshAttendant();
 		$('.arrangement input').click(function(event) {
 			updateTime($(event.target));
@@ -162,6 +163,76 @@ $(function() {
 		});
 	}
 
+    function clear1Arrangements() {
+        $('.arrangement .classmates').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .info').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .own').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .friends').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrBg').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrCircle').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+    }
+
+    function clearArrangements() {
+        $('.arrangement .classmates').velocity("stop").velocity({
+            opacity: 0,
+            top: '-=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .info').velocity("stop").velocity({
+            opacity: 0,
+            top: '-=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .own').velocity("stop").velocity({
+            opacity: 0,
+            top: '+=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .friends').velocity("stop").velocity({
+            opacity: 0,
+            top: '+=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrBg').velocity("stop").velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrCircle').velocity("stop").velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+    }
+
 	function initArrangements() {
 		$('.arrangement .section').each(function(index, el) {
 			var subject = $(el).attr('class').replace('section', '').trim();
@@ -216,6 +287,9 @@ $(function() {
 	}
 
 	function refreshPage($page, $prev) {
+        if ($prev.hasClass('arrangement')) {
+            clearArrangements();
+        }
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
 		$('.slipup').removeClass('slipup').hide();
@@ -232,6 +306,8 @@ $(function() {
 
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
+        } else if ($page.hasClass('arrangement')) {
+            loadArrangement();
 		} else if ($page.hasClass('result')) {
 			loadResult();
 		} else if ($page.hasClass('film')) {
@@ -279,6 +355,40 @@ $(function() {
 			$('.ticket').addClass('sliplb').show();
 		}, 1800);
 	}
+
+    function loadArrangement() {
+        $('.arrangement .info').velocity({
+            top: '+=10px',
+            opacity: 1
+        }, {
+            complete: function() {
+                $('.section.classmates').velocity({
+                    top: '+=10px',
+                    opacity: 1
+                });
+                $('.section.friends').velocity({
+                    top: '-=10px',
+                    opacity: 1
+                });
+                $('.section.own').velocity({
+                    top: '-=10px',
+                    opacity: 1
+                }, {
+                    complete: function() {
+                        $('.arrCircle').velocity({
+                            opacity: 1
+                        }, {
+                            complete: function() {
+                                $('.arrBg').velocity({
+                                    opacity: 1
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
 
 	function loadResult() {
 		if (!reloadResult) {
