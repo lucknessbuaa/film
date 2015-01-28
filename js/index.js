@@ -1,7 +1,7 @@
 var shareText = '爸妈越来越老，能陪他们做的事情越来越少， 趁岁月静好，陪他们回忆青春，再进一次电影院。';
 
 $(function() {
-	/*
+    /*
 	onTouchStart 处理滑动开始
 	onTouchMove 处理滑动过程
 	onTouchEnd 处理滑动结束
@@ -374,39 +374,50 @@ $(function() {
 		}, 1800);
 	}
 
-	function loadArrangement() {
-		$('.arrangement .info').velocity({
-			top: '+=10px',
-			opacity: 1
-		}, {
-			complete: function() {
-				$('.section.classmates').velocity({
-					top: '+=10px',
-					opacity: 1
-				});
-				$('.section.friends').velocity({
-					top: '-=10px',
-					opacity: 1
-				});
-				$('.section.own').velocity({
-					top: '-=10px',
-					opacity: 1
-				}, {
-					complete: function() {
-						$('.arrCircle').velocity({
-							opacity: 1
-						}, {
-							complete: function() {
-								$('.arrBg').velocity({
-									opacity: 1
-								});
-							}
-						});
-					}
-				});
-			}
-		});
-	}
+    var durationTime = 700;
+    var delayTime = 500;
+
+    function loadArrangement() {
+        $('.arrangement .info').velocity({
+            top: '+=10px',
+            opacity: 1
+        }, {
+            duration: durationTime
+        });
+        $('.section.classmates').velocity({
+            top: '+=10px',
+            opacity: 1
+        }, {
+            duration: durationTime,
+            delay: delayTime
+        });
+        $('.section.friends').velocity({
+            top: '-=10px',
+            opacity: 1
+        }, {
+            duration: durationTime,
+            delay: delayTime
+        });
+        $('.section.own').velocity({
+            top: '-=10px',
+            opacity: 1
+        }, {
+            duration: durationTime,
+            delay: delayTime
+        });
+        $('.arrCircle').velocity({
+            opacity: 1
+        }, {
+            duration: 900,
+            delay: delayTime * 2 + 200
+        });
+        $('.arrBg').velocity({
+            opacity: 1
+        }, {
+            duration: 900,
+            delay: delayTime * 3
+        });
+    }
 
 	function loadResult() {
 		if (!reloadResult) {
