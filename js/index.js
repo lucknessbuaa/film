@@ -266,16 +266,20 @@ $(function() {
 		} else if (reloadResult == 1 && resultFinished) {
 			resultFinished = 0;
 			setTimeout(function() {
-				$('.children_0').fadeOut('fast');
-				$('.parents_0').fadeOut('fast');
-				$('.sentence').fadeOut('fast');
+				$('.children_0').fadeOut('slow');
+				$('.parents_0').fadeOut('slow');
+				$('.sentence').fadeOut('slow');
 			}, 100);
-			setTimeout(function() {$('.children_1').addClass('fadein').show();}, 800);
-			setTimeout(function() {$('.parents_1').addClass('fadeup').show();}, 1300);
-			setTimeout(function() {$('span.replace').fadeOut('fast', function() {
+			setTimeout(function() {$('span.replace').fadeOut('slow', function() {
 				$('span.replace').text('时间很短');
 				$('span.replace').fadeIn();
 			});}, 500);
+
+			setTimeout(function() {$('.children_1').addClass('fadein').show();}, 800);
+
+			setTimeout(function() {$('.parents_1').addClass('fadeup').show();}, 1300);
+			setTimeout(function() {$('.sentence10').addClass('bubbleL').show();}, 1700);
+			setTimeout(function() {$('.sentence11').addClass('bubbleR').show();}, 1900);
 			reloadResult = 2;
 		}
 	}
