@@ -1,3 +1,5 @@
+var shareText = '爸妈越来越老，能陪他们做的事情越来越少， 趁岁月静好，陪他们回忆青春，再进一次电影院。';
+
 $(function() {
 	/*
 	onTouchStart 处理滑动开始
@@ -116,6 +118,14 @@ $(function() {
 		if (parseInt(localStorage.end)) {
 			toEnd();
 		}
+
+        $(".film .wrapper textarea").change(function() {
+            var text = $(".film .wrapper textarea").val();
+            if (text && shareText !== text) {
+                shareText = text;
+                configShare();
+            }
+        });
 	}
 
 	function toEnd() {
@@ -842,14 +852,30 @@ $(function() {
 	init();
 });
 
+function configShare() {
+	var entry = 'http://' + window.location.host + '/html/';
+    wx.onMenuShareTimeline({
+	    title: shareText, // 分享标题
+		link: entry, // 分享链接
+		imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
+	});
+
+	wx.onMenuShareAppMessage({
+	    title: '寒假倒计时', // 分享标题
+		desc: shareText, // 分享描述
+		link: entry, // 分享链接
+		imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
+	});
+}
+
 $.get('/api/config', function(data) {
 	if (data.code !== 0) {
 		return;
 	}
 
-	var entry = 'http://' + window.location.host + '/html';
+    data = data.config;
 	wx.config({
-		debug: true,
+		debug: false,
 		appId: 'wx480b16b727066af3',
 		timestamp: data.timestamp,
 		nonceStr: data.noncestr,
@@ -862,21 +888,11 @@ $.get('/api/config', function(data) {
 	});
 
 	wx.ready(function() {
-		wx.onMenuShareTimeline({
-			title: '测试', // 分享标题
-			link: entry, // 分享链接
-			imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
-		});
-
-		wx.onMenuShareAppMessage({
-			title: '测试', // 分享标题
-			desc: '测试', // 分享描述
-			link: entry, // 分享链接
-			imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
-		});
+	    configShare();	
 	});
 
 	wx.error(function(res) {
 		console.log(res);
 	});
 });
+

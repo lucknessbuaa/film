@@ -17,7 +17,7 @@ app.use('/audio', express.static(__dirname + '/audio'))
 app.use('/components', express.static(__dirname + '/components'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
-var entry = 'http://yc.limijiaoyin.com/html';
+var entry = 'http://yc.limijiaoyin.com/html/';
 
 app.get('/api/config', function(req, res) {
 
@@ -51,10 +51,11 @@ app.get('/api/config', function(req, res) {
 
             data = JSON.parse(data);
 
-            var timestamp = new Date().getTime();
+            var timestamp = Math.ceil(new Date().getTime() / 1000);
             var noncestr = uid(15);
             var str = util.format('jsapi_ticket=%s&noncestr=%s&timestamp=%d&url=%s',
                 data.ticket, noncestr, timestamp, entry);
+            console.log(str);
             var sha1 = crypto.createHash('sha1');
             sha1.update(str);
             var signature = sha1.digest('hex');
@@ -62,7 +63,7 @@ app.get('/api/config', function(req, res) {
             var config = {
                 signature: signature,
                 timestamp: timestamp,
-                url: url,
+                url: entry,
                 noncestr: noncestr,
                 jsapi_ticket: data.ticket
             };
