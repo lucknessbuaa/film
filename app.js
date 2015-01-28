@@ -17,7 +17,7 @@ app.use('/audio', express.static(__dirname + '/audio'))
 app.use('/components', express.static(__dirname + '/components'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
-var entry = 'http://yc.limijiaoyin.com/html/';
+var entry = 'http://film.limijiaoyin.com/';
 
 app.get('/api/config', function(req, res) {
 
