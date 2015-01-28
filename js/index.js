@@ -1,3 +1,16 @@
+/*
+onTouchStart 处理滑动开始
+onTouchMove 处理滑动过程
+onTouchEnd 处理滑动结束
+
+refreshPage 处理滑动页面的刷新
+loadXXX 处理页面加载（holiday 第一页，arrangement 第二页，result 第三页，film 第四页
+
+
+*/
+
+
+
 $(function(){
 	var height = 0;
 	var started = 0;
