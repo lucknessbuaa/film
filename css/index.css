@@ -480,7 +480,11 @@ div.info.above-remain {
 	border: none;
 	outline: none;
 }
+
+.film textarea::-webkit-input-placeholder { color: #e77878; }
+
 .sharewrapper .wrapper::after {
+	display: block;
 	content: '48个字以内';
 	color: #909090;
 	position: absolute;
@@ -488,6 +492,10 @@ div.info.above-remain {
 	bottom: 20px;
 	z-index: 9;
 	font-size: 14px;
+}
+
+.sharewrapper .wrapper.focus::after {
+	display: none;
 }
 .link {
 	position: absolute;
@@ -768,6 +776,7 @@ div.share-mask {
 	bottom: 0px;
 	top: 0px;
 	background: url(../img/share_arrow.png) 90% 5% no-repeat rgba(0, 0, 0, .6);
+	background-size: 45px;
 }
 
 @media (min-height: 480px) {
