@@ -208,6 +208,7 @@ $(function() {
 			top: '50px',
 			opacity: 0
 		});
+		$(".film .guide div").show();
 		$(".film .cinima").velocity('stop').css('opacity', 0);
 	}
 
@@ -385,6 +386,7 @@ $(function() {
 						delay: 500,
 						easing: 'ease-out',
 						complete: function() {
+							$('.guide div').hide();
 							$('.wrapper').velocity({
 								opacity: 1
 							}, {
