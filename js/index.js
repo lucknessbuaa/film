@@ -301,15 +301,19 @@ $(function() {
 			}, 1700);
 
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence00').addClass('bubbleL').show();
 			}, 2000);
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence01').addClass('bubbleL').show();
 			}, 2200);
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence02').addClass('bubbleL').show();
 			}, 2300);
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence03').addClass('bubbleR').show();
 				resultFinished = 1;
 			}, 2500);
