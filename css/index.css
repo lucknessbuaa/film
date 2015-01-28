@@ -385,36 +385,36 @@ img.film_ticket {
 	bottom: 20%;
 }
 .slipin {
-	-webkit-animation: slipin 0.7s ease;
-	animation: slipin 0.7s ease;
+	-webkit-animation: slipin 0.8s ease;
+	animation: slipin 0.8s ease;
 }
 .blurin {
-	-webkit-animation: blurin 0.7s ease;
-	animation: blurin 0.7s ease;
+	-webkit-animation: blurin 0.8s ease;
+	animation: blurin 0.8s ease;
 }
 .fadein {
-	-webkit-animation: fadein 0.7s ease;
-	animation: fadein 0.7s ease;
+	-webkit-animation: fadein 0.8s ease;
+	animation: fadein 0.8s ease;
 }
 .fadeup {
-	-webkit-animation: fadeup 0.7s ease;
-	animation: fadeup 0.7s ease;
+	-webkit-animation: fadeup 0.8s ease;
+	animation: fadeup 0.8s ease;
 }
 .slipup {
-	-webkit-animation: slipup 0.7s ease;
-	animation: slipup 0.7s ease;
+	-webkit-animation: slipup 0.8s ease;
+	animation: slipup 0.8s ease;
 }
 .sliplb {
-	-webkit-animation: sliplb 0.7s ease;
-	animation: sliplb 0.7s ease;
+	-webkit-animation: sliplb 0.9s ease;
+	animation: sliplb 0.9s ease;
 }
 .bubbleL {
-	-webkit-animation: bubbleL 0.3s ease;
-	animation: bubbleL 0.3s ease;
+	-webkit-animation: bubbleL 0.6s ease;
+	animation: bubbleL 0.6s ease;
 }
 .bubbleR {
-	-webkit-animation: bubbleR 0.3s ease;
-	animation: bubbleR 0.3s ease;
+	-webkit-animation: bubbleR 0.6s ease;
+	animation: bubbleR 0.6s ease;
 }
 div.startend {
 	margin-top: 30%;
@@ -432,15 +432,21 @@ input.time {
 	padding: 8px 6px;
 	margin: 5px;
 	border: 1px #f2eea4 solid;
-	border-radius: 15px;
+	border-radius: 22px;
 	box-shadow: none;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
+	-webkit-appearance: none;
 }
 input.time.tip {
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	border: 1px rgba(0,0,0,0.5) solid;
+}
+input.time.focus {
+	box-shadow: 0 0 10px #f2eea4 !important;
+	-webkit-box-shadow: 0 0 10px #f2eea4 !important;
+	border: 1px #f2eea4 solid !important;
 }
 .statistic, .remain {
 	clear: both;
@@ -491,7 +497,7 @@ div.info.above-remain {
 	background: transparent;
 	font-size: 14px;
 	width: 100%;
-	height: 80px;
+	height: 68px;
 	border: none;
 	outline: none;
 }
@@ -661,12 +667,23 @@ div.ds-replybox form {
 	background: url('../img/speech.png') no-repeat center;
 	background-size: 100% 100%;
 	position: relative;	
-	width: 80%;
+	width: 63%;
 	margin-left: auto;
 	margin-right: auto;
 	top: 0px;
 	box-sizing: border-box;
 	padding: 20px;
+}
+
+.film .wrapper button.share{ 
+	background: url(../img/share.png) center center no-repeat transparent;
+	border: none;
+	position: absolute;
+	width: 35px;
+	height: 31px;
+	background-size: 100% 100%;
+	right: -4px;
+	top: -4px;
 }
 
 .film .guide {
@@ -682,6 +699,7 @@ div.ds-replybox form {
 	opacity: 0;
 	position: absolute;
 	width: 100%;
+	padding: 3px 0;
 }
 
 .guide > div.first {
@@ -760,4 +778,37 @@ div.ds-replybox form {
 		bottom: 80px;
 		left: -6%;
 	}
+}
+
+div.share-mask {
+	z-index: 2000;
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background: url(../img/share_arrow.png) 90% 5% no-repeat rgba(0, 0, 0, .6);
+}
+
+@media (min-height: 480px) {
+	img.ticket {
+		bottom: 40%;
+	}
+}
+
+.xdsoft_today_button {
+	visibility: hidden !important;
+}
+.xdsoft_current {
+	background-color: #E15253 !important;
+	box-shadow: #E15253 0 1px 3px 0 inset !important;
+}
+.xdsoft_today {
+	color: #E15253 !important;
+}
+.xdsoft_today.xdsoft_current {
+	color: white !important;
 }

@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "jquery": "^2.1.3"
+    "express": "^4.11.1",
+    "got": "^2.3.2",
+    "jquery": "^2.1.3",
+    "memory-cache": "0.0.5",
+    "uid": "0.0.2",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {},
   "scripts": {
