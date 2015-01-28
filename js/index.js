@@ -284,7 +284,7 @@ $(function() {
 		if (!reloadResult) {
 			setTimeout(function() {$('.above-remain').addClass('slipin').show();}, 100);
 			setTimeout(function() {$('.remain').addClass('slipin').show();}, 500);
-			setTimeout(function() {$('span.replace').text('你很忙'); $('.below-remain').addClass('slipin').show();}, 900);
+			setTimeout(function() {$('span.replace').text('你很忙。。。'); $('.below-remain').addClass('slipin').show();}, 900);
 			
 			setTimeout(function() {$('.children_0').addClass('fadein').show();}, 1400);
 			setTimeout(function() {$('.parents_0').addClass('fadeup').show();}, 1700);
@@ -301,7 +301,7 @@ $(function() {
 				$('.sentence').fadeOut('slow');
 			}, 100);
 			setTimeout(function() {$('span.replace').fadeOut('slow', function() {
-				$('span.replace').text('时间很短');
+				$('span.replace').text('时间很短。。。');
 				$('span.replace').fadeIn();
 			});}, 500);
 
