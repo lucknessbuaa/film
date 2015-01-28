@@ -190,6 +190,27 @@ $(function() {
 		});
 	}
 
+	function stopFilm($page) {
+		$('.film .attendant').velocity('stop').css({
+			opacity: 0,
+			bottom: '0px'
+		});
+		$('.film .wrapper').velocity('stop').css('opacity', 0);
+		$(".film .guide div.first").velocity('stop').css({
+			top: '0px',
+			opacity: 0
+		});
+		$(".film .guide div.second").velocity('stop').css({
+			top: '25px',
+			opacity: 0
+		});
+		$(".film .guide div.third").velocity('stop').css({
+			top: '50px',
+			opacity: 0
+		});
+		$(".film .cinima").velocity('stop').css('opacity', 0);
+	}
+
 	function refreshPage($page, $prev) {
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
@@ -200,6 +221,11 @@ $(function() {
 		$('.bubbleL').removeClass('bubbleL').hide();
 		$('.bubbleR').removeClass('bubbleR').hide();
 		$('.flip').removeClass('flip');
+
+		if ($prev.hasClass('film')) {
+			stopFilm($prev);
+		}
+
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
 		} else if ($page.hasClass('result')) {
@@ -293,14 +319,31 @@ $(function() {
 	}
 
 	function loadFilm() {
-		$('img.film_ticket').addClass('blurin').show();
-		$('.film .wrapper, .film .guide span').css('opacity', 0).show();
+		$(".film .cinima").css({
+			bottom: '17%'
+		});
+
 		async.parallel([
 			function(callback) {
-				$('.guide span.first').velocity({
+				$(".film .cinima").velocity({
+					bottom: '20%',
+					opacity: 1
+				}, {
+					duration: 500,
+					easing: 'ease-out',
+					complete: function() {
+						callback(null);
+					}
+				});
+			},
+			function(callback) {
+				$('.guide div.first').velocity({
+					top: '5px',
 					opacity: 1,
 				}, {
-					duration: 1000,
+					delay: 500,
+					easing: 'ease-out',
+					duration: 'fast',
 					complete: function() {
 						console.log('first complete');
 						callback(null);
@@ -308,11 +351,13 @@ $(function() {
 				});
 			},
 			function(callback) {
-				$('.guide span.second').velocity({
+				$('.guide div.second').velocity({
+					top: '30px',
 					opacity: 1
 				}, {
-					duration: 1000,
-					delay: 500,
+					duration: 'fast',
+					easing: 'ease-out',
+					delay: 1000,
 					complete: function() {
 						console.log('second complete');
 						callback(null);
@@ -320,11 +365,13 @@ $(function() {
 				});
 			},
 			function(callback) {
-				$('.guide span.third').velocity({
+				$('.guide div.third').velocity({
+					top: '55px',
 					opacity: 1
 				}, {
-					duration: 1000,
-					delay: 1000,
+					duration: 'fast',
+					easing: 'ease-out',
+					delay: 1500,
 					complete: function() {
 						console.log('third complete');
 						callback(null);
@@ -332,17 +379,30 @@ $(function() {
 				});
 			}
 		], function() {
-			$('.guide span').velocity({
-				opacity: 0
+			$('.film .attendant').velocity({
+				opacity: 1,
+				bottom: '10px'
 			}, {
-				display: 'none',
-				duration: 1000,
-				delay: 500,
+				duration: 'fast',
+				easing: 'ease-out',
 				complete: function() {
-					$('.wrapper').velocity({
-						opacity: 1
+					$('.guide div').velocity({
+						opacity: 0
 					}, {
-						duration: 1000
+						duration: 1000,
+						delay: 500,
+						easing: 'ease-out',
+						complete: function() {
+							$('.wrapper').velocity({
+								opacity: 1
+							}, {
+								duration: 1000,
+								easing: 'ease-out',
+								complete: function() {
+									$('.film img.film_ticket').addClass('blurin').show();
+								}
+							});
+						}
 					});
 				}
 			});
@@ -580,9 +640,6 @@ $(function() {
 					offset = -height * Math.floor(indexFix * 100) / 100;
 				}
 			}
-		} else if (current.hasClass('film') && !next.hasClass('film')) {
-			console.log('hide wrapper');
-			$('.film .wrapper').hide();
 		}
 
 		var index = $('.page').index(next);
