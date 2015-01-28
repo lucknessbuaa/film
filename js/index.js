@@ -397,7 +397,7 @@ $(function() {
 								duration: 'fast',
 								easing: 'ease-out',
 								complete: function() {
-									$('.film img.film_ticket').addClass('blurin').show();
+									$('.film img.film_ticket').addClass('sliplb').show();
 								}
 							});
 						}
