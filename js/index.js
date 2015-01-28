@@ -1,7 +1,7 @@
 var shareText = '爸妈越来越老，能陪他们做的事情越来越少， 趁岁月静好，陪他们回忆青春，再进一次电影院。';
 
 $(function() {
-	/*
+    /*
 	onTouchStart 处理滑动开始
 	onTouchMove 处理滑动过程
 	onTouchEnd 处理滑动结束
@@ -119,20 +119,26 @@ $(function() {
 			toEnd();
 		}
 
-        $(".film .wrapper textarea").change(function() {
-            var text = $(".film .wrapper textarea").val();
-            if (text && shareText !== text) {
-                shareText = text;
-                configShare();
-            }
-        });
+		$(".film .wrapper textarea").change(function() {
+			var text = $(".film .wrapper textarea").val();
+			if (text && shareText !== text) {
+				shareText = text;
+				configShare();
+			}
+		});
 
-        $(".share-mask").on('touchend', function() {
-        	$(".share-mask").velocity('fadeOut');
-        });
-        $(".film .wrapper button.share").on('touchend', function() {
-        	$(".share-mask").velocity('fadeIn');
-        });
+		$(".share-mask").on('touchend', function() {
+			$(".share-mask").velocity('fadeOut');
+		});
+		$(".film .wrapper textarea").focus(function() {
+			$(".film .wrapper").addClass('focus');
+		});
+		$(".film .wrapper textarea").blur(function() {
+			$(".film .wrapper").removeClass('focus');
+		});
+		$(".film .wrapper button.share").on('touchend', function() {
+			$(".share-mask").velocity('fadeIn');
+		});
 	}
 
 	function toEnd() {
@@ -374,39 +380,50 @@ $(function() {
 		}, 1800);
 	}
 
-	function loadArrangement() {
-		$('.arrangement .info').velocity({
-			top: '+=10px',
-			opacity: 1
-		}, {
-			complete: function() {
-				$('.section.classmates').velocity({
-					top: '+=10px',
-					opacity: 1
-				});
-				$('.section.friends').velocity({
-					top: '-=10px',
-					opacity: 1
-				});
-				$('.section.own').velocity({
-					top: '-=10px',
-					opacity: 1
-				}, {
-					complete: function() {
-						$('.arrCircle').velocity({
-							opacity: 1
-						}, {
-							complete: function() {
-								$('.arrBg').velocity({
-									opacity: 1
-								});
-							}
-						});
-					}
-				});
-			}
-		});
-	}
+    var durationTime = 700;
+    var delayTime = 500;
+
+    function loadArrangement() {
+        $('.arrangement .info').velocity({
+            top: '+=10px',
+            opacity: 1
+        }, {
+            duration: durationTime
+        });
+        $('.section.classmates').velocity({
+            top: '+=10px',
+            opacity: 1
+        }, {
+            duration: durationTime,
+            delay: delayTime
+        });
+        $('.section.friends').velocity({
+            top: '-=10px',
+            opacity: 1
+        }, {
+            duration: durationTime,
+            delay: delayTime
+        });
+        $('.section.own').velocity({
+            top: '-=10px',
+            opacity: 1
+        }, {
+            duration: durationTime,
+            delay: delayTime
+        });
+        $('.arrCircle').velocity({
+            opacity: 1
+        }, {
+            duration: 900,
+            delay: delayTime * 2 + 200
+        });
+        $('.arrBg').velocity({
+            opacity: 1
+        }, {
+            duration: 900,
+            delay: delayTime * 3
+        });
+    }
 
 	function loadResult() {
 		if (!reloadResult) {
@@ -868,15 +885,15 @@ $(function() {
 
 function configShare() {
 	var entry = 'http://' + window.location.host + '/html/';
-    var imgUrl = 'http://7u2r9v.com1.z0.glb.clouddn.com/shareicon.png';
-    wx.onMenuShareTimeline({
-	    title: shareText, // 分享标题
+	var imgUrl = 'http://7u2r9v.com1.z0.glb.clouddn.com/shareicon.png';
+	wx.onMenuShareTimeline({
+		title: shareText, // 分享标题
 		link: entry, // 分享链接
 		imgUrl: imgUrl
 	});
 
 	wx.onMenuShareAppMessage({
-	    title: '寒假倒计时', // 分享标题
+		title: '寒假倒计时', // 分享标题
 		desc: shareText, // 分享描述
 		link: entry, // 分享链接
 		imgUrl: imgUrl
@@ -888,7 +905,7 @@ $.get('/api/config', function(data) {
 		return;
 	}
 
-    data = data.config;
+	data = data.config;
 	wx.config({
 		debug: false,
 		appId: 'wx480b16b727066af3',
@@ -903,11 +920,10 @@ $.get('/api/config', function(data) {
 	});
 
 	wx.ready(function() {
-	    configShare();	
+		configShare();
 	});
 
 	wx.error(function(res) {
 		console.log(res);
 	});
 });
-
