@@ -354,8 +354,8 @@ span.small {
 span.middle {
 	font-size: 17px;
 }
-div.info.no-mt {
-	margin-top: 0;
+div.info.below-remain {
+	margin: 0;
 }
 div.info.above-remain {
 	position: relative;
