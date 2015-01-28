@@ -601,6 +601,8 @@ input[type=checkbox] {
 .section.friends {
     position: absolute;
     top: 50%;
+}
+.arrangement .friends label#blabla {
     left: 20px;
 }
 .section.own {
@@ -608,31 +610,6 @@ input[type=checkbox] {
     top: 50%;
     right: 5px;
 }
-/*.classmates {
-	margin-top: 20px;
-	width: 100%;
-}
-.friends {
-	width: 34%;
-	white-space: nowrap;
-	float: left;
-	margin-left: 18px;
-	margin-bottom: 30px;
-}
-.own {
-	float: right;
-	margin-bottom: 30px;
-}
-.arrangement .info {
-	margin: 7px;
-}
-.arrangement .small {
-	display: block;
-	text-align: center;
-	position: absolute;
-	width: 100%;
-	font-size: 12px;
-}*/
 .debug {
 	position: fixed;
 	top: 0;
