@@ -857,14 +857,14 @@ function configShare() {
     wx.onMenuShareTimeline({
 	    title: shareText, // 分享标题
 		link: entry, // 分享链接
-		imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
+		imgUrl: 'http://film.limijiaoyin.com/img/share.png' // 分享图标
 	});
 
 	wx.onMenuShareAppMessage({
 	    title: '寒假倒计时', // 分享标题
 		desc: shareText, // 分享描述
 		link: entry, // 分享链接
-		imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
+		imgUrl: 'http://film.limijiaoyin.com/img/share.png' // 分享图标
 	});
 }
 
