@@ -344,6 +344,7 @@ img.cinima {
 	bottom: 20%;
 }
 img.film_ticket {
+	z-index: 20;
 	bottom: 20%;
 }
 .slipin {
@@ -468,7 +469,7 @@ div.info.above-remain {
 }
 .link {
 	position: absolute;
-	bottom: 7%;
+	bottom: 5%;
 	width: 100%;
 	text-align: center;
 	height: 75px;
