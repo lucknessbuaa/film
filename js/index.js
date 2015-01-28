@@ -96,6 +96,7 @@ $(function() {
 			updateTotal();
 		});
 		initArrangements();
+        clear1Arrangements();
 		refreshAttendant();
 		$('.arrangement input').click(function(event) {
 			updateTime($(event.target));
@@ -162,6 +163,76 @@ $(function() {
 		});
 	}
 
+    function clear1Arrangements() {
+        $('.arrangement .classmates').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .info').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .own').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .friends').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrBg').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrCircle').velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+    }
+
+    function clearArrangements() {
+        $('.arrangement .classmates').velocity("stop").velocity({
+            opacity: 0,
+            top: '-=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .info').velocity("stop").velocity({
+            opacity: 0,
+            top: '-=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .own').velocity("stop").velocity({
+            opacity: 0,
+            top: '+=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .friends').velocity("stop").velocity({
+            opacity: 0,
+            top: '+=10px'
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrBg').velocity("stop").velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+        $('.arrangement .arrCircle').velocity("stop").velocity({
+            opacity: 0,
+        }, {
+            duration: 0
+        });
+    }
+
 	function initArrangements() {
 		$('.arrangement .section').each(function(index, el) {
 			var subject = $(el).attr('class').replace('section', '').trim();
@@ -216,6 +287,9 @@ $(function() {
 	}
 
 	function refreshPage($page, $prev) {
+        if ($prev.hasClass('arrangement')) {
+            clearArrangements();
+        }
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
 		$('.slipup').removeClass('slipup').hide();
@@ -232,6 +306,8 @@ $(function() {
 
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
+        } else if ($page.hasClass('arrangement')) {
+            loadArrangement();
 		} else if ($page.hasClass('result')) {
 			loadResult();
 		} else if ($page.hasClass('film')) {
@@ -280,6 +356,40 @@ $(function() {
 		}, 1800);
 	}
 
+    function loadArrangement() {
+        $('.arrangement .info').velocity({
+            top: '+=10px',
+            opacity: 1
+        }, {
+            complete: function() {
+                $('.section.classmates').velocity({
+                    top: '+=10px',
+                    opacity: 1
+                });
+                $('.section.friends').velocity({
+                    top: '-=10px',
+                    opacity: 1
+                });
+                $('.section.own').velocity({
+                    top: '-=10px',
+                    opacity: 1
+                }, {
+                    complete: function() {
+                        $('.arrCircle').velocity({
+                            opacity: 1
+                        }, {
+                            complete: function() {
+                                $('.arrBg').velocity({
+                                    opacity: 1
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
 	function loadResult() {
 		if (!reloadResult) {
 			setTimeout(function() {
@@ -289,7 +399,7 @@ $(function() {
 				$('.remain').addClass('slipin').show();
 			}, 500);
 			setTimeout(function() {
-				$('span.replace').text('你很忙。。。');
+				$('span.replace').text('你很忙，聚会、逛街、玩手机、看电影…');
 				$('.below-remain').addClass('slipin').show();
 			}, 900);
 
@@ -322,7 +432,7 @@ $(function() {
 			}, 100);
 			setTimeout(function() {
 				$('span.replace').fadeOut('slow', function() {
-					$('span.replace').text('时间很短。。。');
+					$('span.replace').text('时间很短，别让父母的爱，成为永远的等待');
 					$('span.replace').fadeIn();
 				});
 			}, 500);
@@ -445,7 +555,7 @@ $(function() {
 						},
 						function(callback) {
 							setTimeout(function() {
-								$('.film img.film_ticket').addClass('blurin').show();
+								$('.film img.film_ticket').addClass('sliplb').show();
 								callback(null);
 							}, 700);
 						}
