@@ -133,12 +133,13 @@ $(function(){
 		});
 	}
 
-	function refreshPage($page) {
+	function refreshPage($page, $prev) {
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
 		$('.slipup').removeClass('slipup').hide();
 		$('.sliplb').removeClass('sliplb').hide();
 		$('.fadein').removeClass('fadein').hide();
+		$('.fadeup').removeClass('fadeup').hide();
 		$('.flip').removeClass('flip');
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
@@ -177,10 +178,12 @@ $(function(){
 		setTimeout(function() {$('.remain').addClass('slipin').show();}, 1000);
 		setTimeout(function() {$('.below-remain').addClass('slipin').show();}, 1500);
 		setTimeout(function() {$('.children_0').addClass('fadein').show();}, 2000);
-		setTimeout(function() {$('.parents_0').addClass('fadein').show();}, 2500);
+		setTimeout(function() {$('.parents_0').addClass('fadeup').show();}, 2500);
 
-		setTimeout(function() {$('.flipboard.left').addClass('flip');}, 3000);
-		setTimeout(function() {$('.flipboard.right').addClass('flip');}, 3500);
+		setTimeout(function() {$('.children_0').hide('fast');}, 3000);
+		setTimeout(function() {$('.parents_0').hide('fast');}, 3000);
+		setTimeout(function() {$('.children_1').addClass('fadein').show();}, 3500);
+		setTimeout(function() {$('.parents_1').addClass('fadeup').show();}, 4000);
 	}
 
 	function loadFilm() {
@@ -419,7 +422,7 @@ $(function(){
 			next.animate({'opacity':1});
 			current.css('opacity',1);
 			if (current != next) {
-				refreshPage(next);
+				refreshPage(next, current);
 			}
 			if (flag) {
 				showTip();

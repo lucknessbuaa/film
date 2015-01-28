@@ -86,6 +86,26 @@
 		margin-top: 0;
 	}
 }
+@-webkit-keyframes fadeup {
+	from {
+		opacity: 0;
+		margin-bottom: -5%;
+	}
+	to {
+		margin-bottom: 0;
+		opacity: 1;
+	}
+}
+@keyframes fadeup {
+	from {
+		opacity: 0;
+		margin-bottom: -5%;
+	}
+	to {
+		margin-bottom: 0;
+		opacity: 1;
+	}
+}
 @-webkit-keyframes blurin {
 	from {
 		-webkit-filter: blur(10px);
@@ -191,8 +211,8 @@ html, body {
 }
 div.audio {
 	position: absolute;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	padding: 10px;
 	right: 0;
 	background: url('../img/mute_music.png') no-repeat;
@@ -218,35 +238,10 @@ div.audio.mute {
 .flipboard {
 	position: absolute;
 	width: 100%;
-	transform-style: preserve-3d;
-}
-.flipboard.left {
-	width: 95%;
 }
 .flipboard.right {
-	width: 85%;
 	right: 0;
 	bottom: 5%;
-}
-.up {
-	-webkit-transform: rotateY(0deg) !important;
-    transform: rotateY(0deg) !important;
-}
-.down {
-	-webkit-transform: rotateY(180deg) !important;
-    transform: rotateY(180deg) !important;
-}
-.flip .down {
-	-webkit-transition: transform 0.5s ease;
-	transition: transform 0.5s ease;
-	-webkit-transform: rotateY(0deg) !important;
-    transform: rotateY(0deg) !important;
-}
-.flip .up {
-	-webkit-transition: transform 0.5s ease;
-	transition: transform 0.5s ease;
-	-webkit-transform: rotateY(180deg) !important;
-    transform: rotateY(180deg) !important;
 }
 img {
 	backface-visibility: hidden;
@@ -285,6 +280,10 @@ img.film_ticket {
 .fadein {
 	-webkit-animation: fadein 0.5s ease;
 	animation: fadein 0.5s ease;
+}
+.fadeup {
+	-webkit-animation: fadeup 0.5s ease;
+	animation: fadeup 0.5s ease;
 }
 .slipup {
 	-webkit-animation: slipup 0.5s ease;
@@ -355,8 +354,11 @@ span.middle {
 div.info.no-mt {
 	margin-top: 0;
 }
-div.info.no-mb {
-	margin-bottom: 0;
+div.info.above-remain {
+	position: relative;
+	top: 15px;
+	margin: 0;
+	margin-bottom: 10px;
 }
 .film textarea {
 	color: #bf3a3b;
@@ -397,7 +399,7 @@ div.info.no-mb {
 .attendant {
 	opacity: 0;
 	margin-top: 5px;
-	font-size: 14px;
+	font-size: 13px;
 }
 .item {
 	height: 40px;
