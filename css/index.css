@@ -675,3 +675,29 @@ div.ds-replybox form {
 .fadeinout {
 	-webkit-animation: fadeinout 3s 1 linear;
 }
+
+@media (max-width: 320px) and (max-height: 420px) {
+	.flipboard {
+		width: 80%;
+	}
+	img.sentence00 {
+		right: -11%;
+	}
+	img.sentence01 {
+		right: 5%;
+	}
+	img.sentence02 {
+		right: -6%;
+	}
+	img.sentence03 {
+		bottom: 105px;
+	}
+	img.sentence10 {
+		bottom: 121px;
+		right: 0;
+	}
+	img.sentence11 {
+		bottom: 80px;
+		left: -6%;
+	}
+}
