@@ -355,10 +355,10 @@ $(function() {
 		}, 100);
 		setTimeout(function() {
 			$('.endinput').addClass('slipin').show();
-		}, 300);
+		}, 500);
 		setTimeout(function() {
 			$('.statistic').addClass('slipin').show();
-		}, 800);
+		}, 900);
 		setTimeout(function() {
 			$('.people').addClass('slipup').show();
 		}, 1300);

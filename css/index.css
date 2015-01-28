@@ -416,6 +416,7 @@ input.time {
 	box-shadow: none;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
+	-webkit-appearance: none;
 }
 input.time.tip {
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
