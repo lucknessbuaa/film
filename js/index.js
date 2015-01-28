@@ -282,17 +282,37 @@ $(function() {
 
 	function loadResult() {
 		if (!reloadResult) {
-			setTimeout(function() {$('.above-remain').addClass('slipin').show();}, 100);
-			setTimeout(function() {$('.remain').addClass('slipin').show();}, 500);
-			setTimeout(function() {$('span.replace').text('你很忙'); $('.below-remain').addClass('slipin').show();}, 900);
-			
-			setTimeout(function() {$('.children_0').addClass('fadein').show();}, 1400);
-			setTimeout(function() {$('.parents_0').addClass('fadeup').show();}, 1700);
+			setTimeout(function() {
+				$('.above-remain').addClass('slipin').show();
+			}, 100);
+			setTimeout(function() {
+				$('.remain').addClass('slipin').show();
+			}, 500);
+			setTimeout(function() {
+				$('span.replace').text('你很忙。。。');
+				$('.below-remain').addClass('slipin').show();
+			}, 900);
 
-			setTimeout(function() {$('.sentence00').addClass('bubbleL').show();}, 2000);
-			setTimeout(function() {$('.sentence01').addClass('bubbleL').show();}, 2200);
-			setTimeout(function() {$('.sentence02').addClass('bubbleL').show();}, 2300);
-			setTimeout(function() {$('.sentence03').addClass('bubbleR').show(); resultFinished = 1;}, 2500);
+			setTimeout(function() {
+				$('.children_0').addClass('fadein').show();
+			}, 1400);
+			setTimeout(function() {
+				$('.parents_0').addClass('fadeup').show();
+			}, 1700);
+
+			setTimeout(function() {
+				$('.sentence00').addClass('bubbleL').show();
+			}, 2000);
+			setTimeout(function() {
+				$('.sentence01').addClass('bubbleL').show();
+			}, 2200);
+			setTimeout(function() {
+				$('.sentence02').addClass('bubbleL').show();
+			}, 2300);
+			setTimeout(function() {
+				$('.sentence03').addClass('bubbleR').show();
+				resultFinished = 1;
+			}, 2500);
 		} else if (reloadResult == 1 && resultFinished) {
 			resultFinished = 0;
 			setTimeout(function() {
@@ -300,16 +320,30 @@ $(function() {
 				$('.parents_0').fadeOut('slow');
 				$('.sentence').fadeOut('slow');
 			}, 100);
-			setTimeout(function() {$('span.replace').fadeOut('slow', function() {
-				$('span.replace').text('时间很短');
-				$('span.replace').fadeIn();
-			});}, 500);
+			setTimeout(function() {
+				$('span.replace').fadeOut('slow', function() {
+					$('span.replace').text('时间很短。。。');
+					$('span.replace').fadeIn();
+				});
+			}, 500);
 
-			setTimeout(function() {if(!reloadResult) return; $('.children_1').addClass('fadein').show();}, 800);
-			setTimeout(function() {if(!reloadResult) return; $('.parents_1').addClass('fadeup').show();}, 1300);
+			setTimeout(function() {
+				if (!reloadResult) return;
+				$('.children_1').addClass('fadein').show();
+			}, 800);
+			setTimeout(function() {
+				if (!reloadResult) return;
+				$('.parents_1').addClass('fadeup').show();
+			}, 1300);
 
-			setTimeout(function() {if(!reloadResult) return; $('.sentence10').addClass('bubbleL').show();}, 1700);
-			setTimeout(function() {if(!reloadResult) return; $('.sentence11').addClass('bubbleR').show();}, 1900);
+			setTimeout(function() {
+				if (!reloadResult) return;
+				$('.sentence10').addClass('bubbleL').show();
+			}, 1700);
+			setTimeout(function() {
+				if (!reloadResult) return;
+				$('.sentence11').addClass('bubbleR').show();
+			}, 1900);
 			reloadResult = 2;
 		}
 	}
@@ -382,26 +416,42 @@ $(function() {
 				duration: 'fast',
 				easing: 'ease-out',
 				complete: function() {
-					$('.guide div').velocity({
-						opacity: 0
-					}, {
-						duration: 'fast',
-						delay: 500,
-						easing: 'ease-out',
-						complete: function() {
-							$('.guide div').hide();
+					async.parallel([
+						function(callback) {
+							$('.guide div').velocity({
+								opacity: 0
+							}, {
+								duration: 500,
+								delay: 500,
+								easing: 'ease-out',
+								complete: function() {
+									$('.guide div').hide();
+									callback(null);
+								}
+							});
+						},
+						function(callback) {
 							$('.wrapper').velocity({
 								opacity: 1,
 								top: '10px'
 							}, {
-								duration: 'fast',
+								duration: 500,
+								delay: 500,
 								easing: 'ease-out',
 								complete: function() {
-									$('.film img.film_ticket').addClass('sliplb').show();
+									callback(null);
 								}
 							});
+						},
+						function(callback) {
+							setTimeout(function() {
+								$('.film img.film_ticket').addClass('sliplb').show();
+								callback(null);
+							}, 700);
 						}
-					});
+					], function() {
+						console.log('page4 done');
+					})
 				}
 			});
 		});
