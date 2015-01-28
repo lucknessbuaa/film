@@ -385,16 +385,16 @@ img.film_ticket {
 	animation: slipup 0.7s ease;
 }
 .sliplb {
-	-webkit-animation: sliplb 0.7s ease;
-	animation: sliplb 0.7s ease;
+	-webkit-animation: sliplb 0.9s ease;
+	animation: sliplb 0.9s ease;
 }
 .bubbleL {
-	-webkit-animation: bubbleL 0.3s ease;
-	animation: bubbleL 0.3s ease;
+	-webkit-animation: bubbleL 0.5s ease;
+	animation: bubbleL 0.5s ease;
 }
 .bubbleR {
-	-webkit-animation: bubbleR 0.3s ease;
-	animation: bubbleR 0.3s ease;
+	-webkit-animation: bubbleR 0.5s ease;
+	animation: bubbleR 0.5s ease;
 }
 div.startend {
 	margin-top: 30%;
@@ -738,4 +738,24 @@ div.ds-replybox form {
 		bottom: 80px;
 		left: -6%;
 	}
+}
+
+@media (min-height: 480px) {
+	img.ticket {
+		bottom: 40%;
+	}
+}
+
+.xdsoft_today_button {
+	visibility: hidden !important;
+}
+.xdsoft_current {
+	background-color: #E15253 !important;
+	box-shadow: #E15253 0 1px 3px 0 inset !important;
+}
+.xdsoft_today {
+	color: #E15253 !important;
+}
+.xdsoft_today.xdsoft_current {
+	color: white !important;
 }
