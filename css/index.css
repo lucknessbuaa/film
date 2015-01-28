@@ -197,6 +197,20 @@
     0%  {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
+@keyframes 'opacityLight' {
+    from {
+        opacity: 0.8;
+        margin-bottom: -5px;
+    }
+    50% {
+        opacity: 1;
+        margin-bottom: 15px;
+    }
+    to {
+        opacity: 0.8;
+        margin-bottom: -5px;
+    }
+}
 @-webkit-keyframes 'opacityLight' {
     from {
         opacity: 0.8;
@@ -263,9 +277,14 @@ html, body {
 	background: url('../img/arrow.png') no-repeat center;
 	background-size: contain;
     opacity: 0.8;
+}
+.page:not(:last-child)::after {
     -webkit-animation-name: opacityLight;
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
+    animation-name: opacityLight;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 div.audio {
 	position: absolute;
@@ -574,18 +593,18 @@ input[type=checkbox] {
 }
 .arrangement .arrCircle {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     background: url('../img/arrCircle.png') no-repeat;
-    background-size: 200px 200px;
+    background-size: 100% 100%;
     margin-top: -100px;
-    margin-left: -100px;
-    height: 200px;
-    width: 200px;
+    margin-left: -35%;
+    height: 40%;
+    width: 70%;
 }
 .section.classmates {
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 50%;
     width: 200px;
     margin-left: -100px;
@@ -596,11 +615,12 @@ input[type=checkbox] {
     left: 50%;
     width: 200px;
     margin-left: -100px;
-    margin-top: -40px;
+    margin-top: -20px;
 }
 .section.friends {
     position: absolute;
     top: 50%;
+    margin-top: 20px;
 }
 .arrangement .friends label#blabla {
     left: 20px;
@@ -609,6 +629,7 @@ input[type=checkbox] {
     position: absolute;
     top: 50%;
     right: 5px;
+    margin-top:20px;
 }
 .debug {
 	position: fixed;

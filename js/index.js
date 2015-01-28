@@ -356,28 +356,36 @@ $(function() {
 		}, 1800);
 	}
 
+    var durationTime = 900;
     function loadArrangement() {
         $('.arrangement .info').velocity({
             top: '+=10px',
             opacity: 1
         }, {
+            duration: durationTime,
             complete: function() {
                 $('.section.classmates').velocity({
                     top: '+=10px',
                     opacity: 1
+                }, {
+                    duration: durationTime
                 });
                 $('.section.friends').velocity({
                     top: '-=10px',
                     opacity: 1
+                }, {
+                    duration: durationTime
                 });
                 $('.section.own').velocity({
                     top: '-=10px',
                     opacity: 1
                 }, {
+                    duration: durationTime,
                     complete: function() {
                         $('.arrCircle').velocity({
                             opacity: 1
                         }, {
+                            duration: durationTime,
                             complete: function() {
                                 $('.arrBg').velocity({
                                     opacity: 1
