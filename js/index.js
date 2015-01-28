@@ -126,6 +126,13 @@ $(function() {
                 configShare();
             }
         });
+
+        $(".share-mask").on('touchend', function() {
+        	$(".share-mask").velocity('fadeOut');
+        });
+        $(".film .wrapper button.share").on('touchend', function() {
+        	$(".share-mask").velocity('fadeIn');
+        });
 	}
 
 	function toEnd() {

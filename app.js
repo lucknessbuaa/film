@@ -8,14 +8,7 @@ var cache = require('memory-cache');
 var express = require('express');
 var app = express();
 
-app.use('/html', express.static(__dirname + '/html'))
-app.use('/js', express.static(__dirname + '/js'))
-app.use('/css', express.static(__dirname + '/css'))
-app.use('/img', express.static(__dirname + '/img'))
-app.use('/font', express.static(__dirname + '/font'))
-app.use('/audio', express.static(__dirname + '/audio'))
-app.use('/components', express.static(__dirname + '/components'))
-app.use('/node_modules', express.static(__dirname + '/node_modules'))
+app.use(express.static(__dirname + '/'));
 
 var entry = 'http://film.limijiaoyin.com/';
 

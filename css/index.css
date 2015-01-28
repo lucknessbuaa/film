@@ -477,7 +477,7 @@ div.info.above-remain {
 	background: transparent;
 	font-size: 14px;
 	width: 100%;
-	height: 80px;
+	height: 68px;
 	border: none;
 	outline: none;
 }
@@ -645,12 +645,23 @@ div.ds-replybox form {
 	background: url('../img/speech.png') no-repeat center;
 	background-size: 100% 100%;
 	position: relative;	
-	width: 80%;
+	width: 63%;
 	margin-left: auto;
 	margin-right: auto;
 	top: 0px;
 	box-sizing: border-box;
 	padding: 20px;
+}
+
+.film .wrapper button.share{ 
+	background: url(../img/share.png) center center no-repeat transparent;
+	border: none;
+	position: absolute;
+	width: 35px;
+	height: 31px;
+	background-size: 100% 100%;
+	right: -4px;
+	top: -4px;
 }
 
 .film .guide {
@@ -745,6 +756,19 @@ div.ds-replybox form {
 		bottom: 80px;
 		left: -6%;
 	}
+}
+
+div.share-mask {
+	z-index: 2000;
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background: url(../img/share_arrow.png) 90% 5% no-repeat rgba(0, 0, 0, .6);
 }
 
 @media (min-height: 480px) {
