@@ -96,7 +96,7 @@ $(function() {
 			updateTotal();
 		});
 		initArrangements();
-        clear1Arrangements();
+		clear1Arrangements();
 		refreshAttendant();
 		$('.arrangement input').click(function(event) {
 			updateTime($(event.target));
@@ -163,75 +163,75 @@ $(function() {
 		});
 	}
 
-    function clear1Arrangements() {
-        $('.arrangement .classmates').velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-        $('.arrangement .info').velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-        $('.arrangement .own').velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-        $('.arrangement .friends').velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-        $('.arrangement .arrBg').velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-        $('.arrangement .arrCircle').velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-    }
+	function clear1Arrangements() {
+		$('.arrangement .classmates').velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+		$('.arrangement .info').velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+		$('.arrangement .own').velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+		$('.arrangement .friends').velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+		$('.arrangement .arrBg').velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+		$('.arrangement .arrCircle').velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+	}
 
-    function clearArrangements() {
-        $('.arrangement .classmates').velocity("stop").velocity({
-            opacity: 0,
-            top: '-=10px'
-        }, {
-            duration: 0
-        });
-        $('.arrangement .info').velocity("stop").velocity({
-            opacity: 0,
-            top: '-=10px'
-        }, {
-            duration: 0
-        });
-        $('.arrangement .own').velocity("stop").velocity({
-            opacity: 0,
-            top: '+=10px'
-        }, {
-            duration: 0
-        });
-        $('.arrangement .friends').velocity("stop").velocity({
-            opacity: 0,
-            top: '+=10px'
-        }, {
-            duration: 0
-        });
-        $('.arrangement .arrBg').velocity("stop").velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-        $('.arrangement .arrCircle').velocity("stop").velocity({
-            opacity: 0,
-        }, {
-            duration: 0
-        });
-    }
+	function clearArrangements() {
+		$('.arrangement .classmates').velocity("stop").velocity({
+			opacity: 0,
+			top: '-=10px'
+		}, {
+			duration: 0
+		});
+		$('.arrangement .info').velocity("stop").velocity({
+			opacity: 0,
+			top: '-=10px'
+		}, {
+			duration: 0
+		});
+		$('.arrangement .own').velocity("stop").velocity({
+			opacity: 0,
+			top: '+=10px'
+		}, {
+			duration: 0
+		});
+		$('.arrangement .friends').velocity("stop").velocity({
+			opacity: 0,
+			top: '+=10px'
+		}, {
+			duration: 0
+		});
+		$('.arrangement .arrBg').velocity("stop").velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+		$('.arrangement .arrCircle').velocity("stop").velocity({
+			opacity: 0,
+		}, {
+			duration: 0
+		});
+	}
 
 	function initArrangements() {
 		$('.arrangement .section').each(function(index, el) {
@@ -287,9 +287,9 @@ $(function() {
 	}
 
 	function refreshPage($page, $prev) {
-        if ($prev.hasClass('arrangement')) {
-            clearArrangements();
-        }
+		if ($prev.hasClass('arrangement')) {
+			clearArrangements();
+		}
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
 		$('.slipup').removeClass('slipup').hide();
@@ -306,8 +306,8 @@ $(function() {
 
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
-        } else if ($page.hasClass('arrangement')) {
-            loadArrangement();
+		} else if ($page.hasClass('arrangement')) {
+			loadArrangement();
 		} else if ($page.hasClass('result')) {
 			loadResult();
 		} else if ($page.hasClass('film')) {
@@ -356,39 +356,39 @@ $(function() {
 		}, 1800);
 	}
 
-    function loadArrangement() {
-        $('.arrangement .info').velocity({
-            top: '+=10px',
-            opacity: 1
-        }, {
-            complete: function() {
-                $('.section.classmates').velocity({
-                    top: '+=10px',
-                    opacity: 1
-                });
-                $('.section.friends').velocity({
-                    top: '-=10px',
-                    opacity: 1
-                });
-                $('.section.own').velocity({
-                    top: '-=10px',
-                    opacity: 1
-                }, {
-                    complete: function() {
-                        $('.arrCircle').velocity({
-                            opacity: 1
-                        }, {
-                            complete: function() {
-                                $('.arrBg').velocity({
-                                    opacity: 1
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
+	function loadArrangement() {
+		$('.arrangement .info').velocity({
+			top: '+=10px',
+			opacity: 1
+		}, {
+			complete: function() {
+				$('.section.classmates').velocity({
+					top: '+=10px',
+					opacity: 1
+				});
+				$('.section.friends').velocity({
+					top: '-=10px',
+					opacity: 1
+				});
+				$('.section.own').velocity({
+					top: '-=10px',
+					opacity: 1
+				}, {
+					complete: function() {
+						$('.arrCircle').velocity({
+							opacity: 1
+						}, {
+							complete: function() {
+								$('.arrBg').velocity({
+									opacity: 1
+								});
+							}
+						});
+					}
+				});
+			}
+		});
+	}
 
 	function loadResult() {
 		if (!reloadResult) {
@@ -842,11 +842,41 @@ $(function() {
 	init();
 });
 
-// wx.config({
-// 	debug: true,
-// 	appId: '',
-// 	timestamp: ,
-// 	nonceStr: '',
-// 	signature: '',
-// 	jsApiList: []
-// });
+$.get('/api/config', function(data) {
+	if (data.code !== 0) {
+		return;
+	}
+
+	var entry = 'http://' + window.location.host + '/html';
+	wx.config({
+		debug: true,
+		appId: 'wx480b16b727066af3',
+		timestamp: data.timestamp,
+		nonceStr: data.noncestr,
+		signature: data.signature,
+		jsApiList: ['onMenuShareTimeline',
+			'onMenuShareAppMessage',
+			'onMenuShareQQ',
+			'onMenuShareWeibo'
+		]
+	});
+
+	wx.ready(function() {
+		wx.onMenuShareTimeline({
+			title: '测试', // 分享标题
+			link: entry, // 分享链接
+			imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
+		});
+
+		wx.onMenuShareAppMessage({
+			title: '测试', // 分享标题
+			desc: '测试', // 分享描述
+			link: entry, // 分享链接
+			imgUrl: 'http://www.jiaoyin.cm/wp-content/uploads/2013/06/logo2.png' // 分享图标
+		});
+	});
+
+	wx.error(function(res) {
+		console.log(res);
+	});
+});
