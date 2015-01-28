@@ -299,7 +299,33 @@ img.sentence {
 	height: 36px;
 }
 img.sentence00 {
-
+	right: 1%;
+	top: 13px;
+}
+img.sentence01 {
+	top: 50px;
+	right: 13%;
+	height: 24px;
+}
+img.sentence02 {
+	top: 75px;
+	right: 1%;
+	height: 30px;
+}
+img.sentence03 {
+	bottom: 135px;
+	height: 32px;
+	right: 27%;
+}
+img.sentence10 {
+	bottom: 143px;
+	height: 28px;
+	right: 2%;
+}
+img.sentence11 {
+	bottom: 114px;
+	height: 46px;
+	left: 3%;
 }
 img.people {
 	bottom: 0;
