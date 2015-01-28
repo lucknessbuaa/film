@@ -289,7 +289,7 @@ $(function() {
 				$('.remain').addClass('slipin').show();
 			}, 500);
 			setTimeout(function() {
-				$('span.replace').text('你很忙。。。');
+				$('span.replace').text('你很忙，聚会、逛街、玩手机、看电影…');
 				$('.below-remain').addClass('slipin').show();
 			}, 900);
 
@@ -322,7 +322,7 @@ $(function() {
 			}, 100);
 			setTimeout(function() {
 				$('span.replace').fadeOut('slow', function() {
-					$('span.replace').text('时间很短。。。');
+					$('span.replace').text('时间很短，别让父母的爱，成为永远的等待');
 					$('span.replace').fadeIn();
 				});
 			}, 500);
