@@ -140,6 +140,46 @@
 		margin-top: 0;
 	}
 }
+@-webkit-keyframes bubbleL {
+	from {
+		-webkit-transform: scale(0);
+		-webkit-transform-origin: left;
+	}
+	to {
+		-webkit-transform: scale(1);
+		-webkit-transform-origin: left;
+	}
+}
+@keyframes bubbleL {
+	from {
+		transform: scale(0);
+		transform-origin: left;
+	}
+	to {
+		transform: scale(1);
+		transform-origin: left;
+	}
+}
+@-webkit-keyframes bubbleR {
+	from {
+		-webkit-transform: scale(0);
+		-webkit-transform-origin: right;
+	}
+	to {
+		-webkit-transform: scale(1);
+		-webkit-transform-origin: right;
+	}
+}
+@keyframes bubbleR {
+	from {
+		transform: scale(0);
+		transform-origin: right;
+	}
+	to {
+		transform: scale(1);
+		transform-origin: right;
+	}
+}
 @-webkit-keyframes flip {
     from  {-webkit-transform: rotateY(0deg);}
     to {-webkit-transform: rotateY(180deg);}
@@ -253,6 +293,13 @@ img.full {
 	transform: translate3d(0, 0, 0);
 	-webkit-transform: translate3d(0, 0, 0);
 }
+img.sentence {
+	position: absolute;
+	height: 36px;
+}
+img.sentence00 {
+
+}
 img.people {
 	bottom: 0;
 }
@@ -295,6 +342,14 @@ img.film_ticket {
 .sliplb {
 	-webkit-animation: sliplb 0.7s ease;
 	animation: sliplb 0.7s ease;
+}
+.bubbleL {
+	-webkit-animation: bubbleL 0.3s ease;
+	animation: bubbleL 0.3s ease;
+}
+.bubbleR {
+	-webkit-animation: bubbleR 0.3s ease;
+	animation: bubbleR 0.3s ease;
 }
 div.startend {
 	margin-top: 30%;

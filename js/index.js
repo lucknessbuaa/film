@@ -155,6 +155,8 @@ $(function(){
 		$('.sliplb').removeClass('sliplb').hide();
 		$('.fadein').removeClass('fadein').hide();
 		$('.fadeup').removeClass('fadeup').hide();
+		$('.bubbleL').removeClass('bubbleL').hide();
+		$('.bubbleR').removeClass('bubbleR').hide();
 		$('.flip').removeClass('flip');
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
@@ -198,15 +200,22 @@ $(function(){
 		if (!reloadResult) {
 			setTimeout(function() {$('.above-remain').addClass('slipin').show();}, 100);
 			setTimeout(function() {$('.remain').addClass('slipin').show();}, 500);
-			setTimeout(function() {$('.below-remain').addClass('slipin').show();}, 900);
+			setTimeout(function() {$('span.replace').text('你很忙'); $('.below-remain').addClass('slipin').show();}, 900);
 			setTimeout(function() {$('.children_0').addClass('fadein').show();}, 1400);
 			setTimeout(function() {$('.parents_0').addClass('fadeup').show(); resultFinished = 1;}, 1900);
 		} else if (reloadResult == 1 && resultFinished) {
 			resultFinished = 0;
-			setTimeout(function() {$('.children_0').fadeOut('fast');}, 100);
-			setTimeout(function() {$('.parents_0').fadeOut('fast');}, 100);
+			setTimeout(function() {
+				$('.children_0').fadeOut('fast');
+				$('.parents_0').fadeOut('fast');
+				$('.sentence').fadeOut('fast');
+			}, 100);
 			setTimeout(function() {$('.children_1').addClass('fadein').show();}, 500);
 			setTimeout(function() {$('.parents_1').addClass('fadeup').show();}, 1000);
+			setTimeout(function() {$('span.replace').fadeOut('fast', function() {
+				$('span.replace').text('时间很短');
+				$('span.replace').fadeIn();
+			});}, 1300);
 			reloadResult = 2;
 		}
 	}
