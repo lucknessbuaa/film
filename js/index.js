@@ -854,17 +854,18 @@ $(function() {
 
 function configShare() {
 	var entry = 'http://' + window.location.host + '/html/';
+    var imgUrl = 'http://7u2r9v.com1.z0.glb.clouddn.com/shareicon.png';
     wx.onMenuShareTimeline({
 	    title: shareText, // 分享标题
 		link: entry, // 分享链接
-		imgUrl: 'http://film.limijiaoyin.com/img/share.png' // 分享图标
+		imgUrl: imgUrl
 	});
 
 	wx.onMenuShareAppMessage({
 	    title: '寒假倒计时', // 分享标题
 		desc: shareText, // 分享描述
 		link: entry, // 分享链接
-		imgUrl: 'http://film.limijiaoyin.com/img/share.png' // 分享图标
+		imgUrl: imgUrl
 	});
 }
 

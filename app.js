@@ -31,7 +31,7 @@ app.get('/api/config', function(req, res) {
 
     got.get('http://kuzhanggui.com/backend/settings/token/limijiaoyin', function(err, data) {
         if (err) {
-            console.error(e);
+            console.error(err);
             return res.json({
                 code: 1001
             });
@@ -43,7 +43,7 @@ app.get('/api/config', function(req, res) {
             type: 'jsapi'
         }), function(err, data) {
             if (err) {
-                console.error(e);
+                console.error(err);
                 return res.json({
                     code: 1001
                 });

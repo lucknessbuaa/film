@@ -1,0 +1,7 @@
+{
+    "name": "film",
+    "script": "app.js",
+    "env": {
+    "NODE_ENV": "development"
+    }
+}
