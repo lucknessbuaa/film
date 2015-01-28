@@ -282,7 +282,7 @@ div.audio.mute {
 }
 .flipboard.right {
 	right: 0;
-	bottom: 5%;
+	bottom: 0;
 }
 img {
 	backface-visibility: hidden;
