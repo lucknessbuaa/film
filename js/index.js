@@ -195,7 +195,10 @@ $(function() {
 			opacity: 0,
 			bottom: '0px'
 		});
-		$('.film .wrapper').velocity('stop').css('opacity', 0);
+		$('.film .wrapper').velocity('stop').css({
+			opacity: 0,
+			top: '0px'
+		});
 		$(".film .guide div.first").velocity('stop').css({
 			top: '0px',
 			opacity: 0
@@ -382,15 +385,16 @@ $(function() {
 					$('.guide div').velocity({
 						opacity: 0
 					}, {
-						duration: 1000,
+						duration: 'fast',
 						delay: 500,
 						easing: 'ease-out',
 						complete: function() {
 							$('.guide div').hide();
 							$('.wrapper').velocity({
-								opacity: 1
+								opacity: 1,
+								top: '10px'
 							}, {
-								duration: 1000,
+								duration: 'fast',
 								easing: 'ease-out',
 								complete: function() {
 									$('.film img.film_ticket').addClass('blurin').show();
