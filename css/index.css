@@ -22,6 +22,50 @@
 		margin-top: 0;
 	}
 }
+@-webkit-keyframes slipup {
+	from {
+		opacity: 0;
+		margin-bottom: -10%;
+	}
+	to {
+		opacity: 1;
+		margin-bottom: 0;
+	}
+}
+@keyframes slipup {
+	from {
+		opacity: 0;
+		margin-bottom: -10%;
+	}
+	to {
+		opacity: 1;
+		margin-bottom: 0;
+	}
+}
+@-webkit-keyframes sliplb {
+	from {
+		opacity: 0;
+		margin-left: 10%;
+		margin-bottom: 10%;
+	}
+	to {
+		opacity: 1;
+		margin-left: 0;
+		margin-bottom: 0;
+	}
+}
+@keyframes sliplb {
+	from {
+		opacity: 0;
+		margin-left: 10%;
+		margin-bottom: 10%;
+	}
+	to {
+		opacity: 1;
+		margin-left: 0;
+		margin-bottom: 0;
+	}
+}
 @-webkit-keyframes fadein {
 	from {
 		opacity: 0;
@@ -43,7 +87,26 @@
 	}
 }
 
-
+@-webkit-keyframes fadeup {
+	from {
+		opacity: 0;
+		margin-bottom: -5%;
+	}
+	to {
+		margin-bottom: 0;
+		opacity: 1;
+	}
+}
+@keyframes fadeup {
+	from {
+		opacity: 0;
+		margin-bottom: -5%;
+	}
+	to {
+		margin-bottom: 0;
+		opacity: 1;
+	}
+}
 @-webkit-keyframes blurin {
 	from {
 		-webkit-filter: blur(10px);
@@ -76,6 +139,46 @@
 		width: 100%;
 		margin-left: 0;
 		margin-top: 0;
+	}
+}
+@-webkit-keyframes bubbleL {
+	from {
+		-webkit-transform: scale(0);
+		-webkit-transform-origin: left;
+	}
+	to {
+		-webkit-transform: scale(1);
+		-webkit-transform-origin: left;
+	}
+}
+@keyframes bubbleL {
+	from {
+		transform: scale(0);
+		transform-origin: left;
+	}
+	to {
+		transform: scale(1);
+		transform-origin: left;
+	}
+}
+@-webkit-keyframes bubbleR {
+	from {
+		-webkit-transform: scale(0);
+		-webkit-transform-origin: right;
+	}
+	to {
+		-webkit-transform: scale(1);
+		-webkit-transform-origin: right;
+	}
+}
+@keyframes bubbleR {
+	from {
+		transform: scale(0);
+		transform-origin: right;
+	}
+	to {
+		transform: scale(1);
+		transform-origin: right;
 	}
 }
 @-webkit-keyframes flip {
@@ -149,8 +252,8 @@ html, body {
 }
 div.audio {
 	position: absolute;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	padding: 10px;
 	right: 0;
 	background: url('../img/mute_music.png') no-repeat;
@@ -173,30 +276,13 @@ div.audio.mute {
 .hide {
 	display: none;
 }
-.flip {
-	-webkit-animation: flip 0.5s ease !important;
-	animation: flip 0.5s ease !important;
-}
 .flipboard {
 	position: absolute;
 	width: 100%;
-	transform-style: preserve-3d;
-}
-.flipboard.left {
-	width: 95%;
 }
 .flipboard.right {
-	width: 85%;
 	right: 0;
 	bottom: 5%;
-}
-.up {
-	-webkit-transform: rotateY(0deg) !important;
-    transform: rotateY(0deg) !important;
-}
-.down {
-	-webkit-transform: rotateY(180deg) !important;
-    transform: rotateY(180deg) !important;
 }
 img {
 	backface-visibility: hidden;
@@ -208,8 +294,18 @@ img.full {
 	transform: translate3d(0, 0, 0);
 	-webkit-transform: translate3d(0, 0, 0);
 }
+img.sentence {
+	position: absolute;
+	height: 36px;
+}
+img.sentence00 {
+
+}
 img.people {
 	bottom: 0;
+}
+img.ticket {
+	bottom: 5%;
 }
 img.children {
 	left: 0;
@@ -225,16 +321,36 @@ img.film_ticket {
 	bottom: 20%;
 }
 .slipin {
-	-webkit-animation: slipin 0.5s ease;
-	animation: slipin 0.5s ease;
+	-webkit-animation: slipin 0.7s ease;
+	animation: slipin 0.7s ease;
 }
 .blurin {
-	-webkit-animation: blurin 0.5s ease;
-	animation: blurin 0.5s ease;
+	-webkit-animation: blurin 0.7s ease;
+	animation: blurin 0.7s ease;
 }
 .fadein {
-	-webkit-animation: fadein 0.5s ease;
-	animation: fadein 0.5s ease;
+	-webkit-animation: fadein 0.7s ease;
+	animation: fadein 0.7s ease;
+}
+.fadeup {
+	-webkit-animation: fadeup 0.7s ease;
+	animation: fadeup 0.7s ease;
+}
+.slipup {
+	-webkit-animation: slipup 0.7s ease;
+	animation: slipup 0.7s ease;
+}
+.sliplb {
+	-webkit-animation: sliplb 0.7s ease;
+	animation: sliplb 0.7s ease;
+}
+.bubbleL {
+	-webkit-animation: bubbleL 0.3s ease;
+	animation: bubbleL 0.3s ease;
+}
+.bubbleR {
+	-webkit-animation: bubbleR 0.3s ease;
+	animation: bubbleR 0.3s ease;
 }
 div.startend {
 	margin-top: 30%;
@@ -294,11 +410,14 @@ span.small {
 span.middle {
 	font-size: 17px;
 }
-div.info.no-mt {
-	margin-top: 0;
+div.info.below-remain {
+	margin: 0;
 }
-div.info.no-mb {
-	margin-bottom: 0;
+div.info.above-remain {
+	position: relative;
+	top: 15px;
+	margin: 0;
+	margin-bottom: 10px;
 }
 .film textarea {
 	color: #bf3a3b;
@@ -336,7 +455,7 @@ div.info.no-mb {
 .attendant {
 	opacity: 0;
 	margin-top: 5px;
-	font-size: 14px;
+	font-size: 13px;
 }
 .item {
 	height: 40px;

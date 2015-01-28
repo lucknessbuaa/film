@@ -1,4 +1,13 @@
 $(function() {
+	/*
+	onTouchStart 处理滑动开始
+	onTouchMove 处理滑动过程
+	onTouchEnd 处理滑动结束
+
+	refreshPage 处理滑动页面的刷新
+	loadXXX 处理页面加载（holiday 第一页，arrangement 第二页，result 第三页，film 第四页
+	*/
+
 	var height = 0;
 	var started = 0;
 	var startY = 0;
@@ -68,6 +77,8 @@ $(function() {
 	var track = '/audio/1.mp3';
 	var audio = null;
 	var played = 0;
+	var reloadResult = 0;
+	var resultFinished = 0;
 
 	function init() {
 		$('.page').eq(0).addClass('current');
@@ -179,17 +190,28 @@ $(function() {
 		});
 	}
 
-	function refreshPage($page) {
+	function refreshPage($page, $prev) {
 		$('.blurin').removeClass('blurin').hide();
 		$('.slipin').removeClass('slipin').hide();
+		$('.slipup').removeClass('slipup').hide();
+		$('.sliplb').removeClass('sliplb').hide();
 		$('.fadein').removeClass('fadein').hide();
-		$('.flip').removeClass('flip').hide();
+		$('.fadeup').removeClass('fadeup').hide();
+		$('.bubbleL').removeClass('bubbleL').hide();
+		$('.bubbleR').removeClass('bubbleR').hide();
+		$('.flip').removeClass('flip');
 		if ($page.hasClass('holiday')) {
 			loadHoliday();
 		} else if ($page.hasClass('result')) {
 			loadResult();
 		} else if ($page.hasClass('film')) {
 			loadFilm();
+		}
+	}
+
+	function reloadPage($page) {
+		if ($page.hasClass('result') && reloadResult) {
+			loadResult();
 		}
 	}
 
@@ -212,42 +234,62 @@ $(function() {
 
 	function loadHoliday() {
 		setTimeout(function() {
-			$('img.ticket').addClass('blurin').show();
-		}, 500);
-		$('img.title').addClass('slipin').show();
+			$('img.title').addClass('blurin').show();
+		}, 100);
+		setTimeout(function() {
+			$('.endinput').addClass('slipin').show();
+		}, 300);
+		setTimeout(function() {
+			$('.statistic').addClass('slipin').show();
+		}, 800);
+		setTimeout(function() {
+			$('.people').addClass('slipup').show();
+		}, 1300);
+		setTimeout(function() {
+			$('.ticket').addClass('sliplb').show();
+		}, 1800);
 	}
 
 	function loadResult() {
-		setTimeout(function() {
-			$('.above-remain').addClass('slipin').show();
-		}, 500);
-		setTimeout(function() {
-			$('.remain').addClass('slipin').show();
-		}, 1000);
-		setTimeout(function() {
-			$('.below-remain').addClass('slipin').show();
-		}, 1500);
-		setTimeout(function() {
-			$('.children_0').addClass('fadein').show();
-		}, 2000);
-		setTimeout(function() {
-			$('.parents_0').addClass('fadein').show();
-		}, 2500);
-
-		var exchangeUpDown = function($el) {
-			var $up = $el.find('.up');
-			var $down = $el.find('.down');
-			$up.removeClass('up').addClass('down');
-			$down.removeClass('down').addClass('up');
-		};
-		setTimeout(function() {
-			$('.flipboard.left').addClass('flip').show();
-			exchangeUpDown($('.flipboard.left'))
-		}, 3000);
-		setTimeout(function() {
-			$('.flipboard.right').addClass('flip').show();
-			exchangeUpDown($('.flipboard.right'))
-		}, 3500);
+		if (!reloadResult) {
+			setTimeout(function() {
+				$('.above-remain').addClass('slipin').show();
+			}, 100);
+			setTimeout(function() {
+				$('.remain').addClass('slipin').show();
+			}, 500);
+			setTimeout(function() {
+				$('span.replace').text('你很忙');
+				$('.below-remain').addClass('slipin').show();
+			}, 900);
+			setTimeout(function() {
+				$('.children_0').addClass('fadein').show();
+			}, 1400);
+			setTimeout(function() {
+				$('.parents_0').addClass('fadeup').show();
+				resultFinished = 1;
+			}, 1900);
+		} else if (reloadResult == 1 && resultFinished) {
+			resultFinished = 0;
+			setTimeout(function() {
+				$('.children_0').fadeOut('fast');
+				$('.parents_0').fadeOut('fast');
+				$('.sentence').fadeOut('fast');
+			}, 100);
+			setTimeout(function() {
+				$('.children_1').addClass('fadein').show();
+			}, 500);
+			setTimeout(function() {
+				$('.parents_1').addClass('fadeup').show();
+			}, 1000);
+			setTimeout(function() {
+				$('span.replace').fadeOut('fast', function() {
+					$('span.replace').text('时间很短');
+					$('span.replace').fadeIn();
+				});
+			}, 1300);
+			reloadResult = 2;
+		}
 	}
 
 	function loadFilm() {
@@ -476,13 +518,16 @@ $(function() {
 		offsetY = curY - startY;
 		offset += offsetY;
 		startY = curY;
-		$(".pagewrapper").css('top', '+=' + offsetY);
+		if (!($('.current').hasClass('result') && reloadResult != 2)) {
+			$(".pagewrapper").css('top', '+=' + offsetY);
 
-		if (!$('.current').hasClass('long')) {
-			var opacity = 0.9 - Math.abs(offset) / height;
-			opacity = opacity < 0 ? 0 : opacity;
-			$(".current").css('opacity', opacity);
+			if (!$('.current').hasClass('long')) {
+				var opacity = 0.9 - Math.abs(offset) / height;
+				opacity = opacity < 0 ? 0 : opacity;
+				$(".current").css('opacity', opacity);
+			}
 		}
+
 		if (curY <= 0) {
 			onTouchEnd(event);
 		}
@@ -509,9 +554,16 @@ $(function() {
 			next = current.prev('.page');
 			next = next.length === 1 ? next : current;
 		}
+
 		if (current.hasClass('holiday') && !total) {
 			next = current;
 			flag = 1;
+		}
+		if (current.hasClass('result') && next.hasClass('film') && reloadResult != 2) {
+			next = current;
+			reloadResult = 1;
+		} else if (current.hasClass('result') && reloadResult == 2) {
+			reloadResult = 0;
 		}
 		if (current.hasClass('long')) {
 			if ($('#ds-wrapper').length) {
@@ -557,7 +609,9 @@ $(function() {
 			});
 			current.css('opacity', 1);
 			if (current != next) {
-				refreshPage(next);
+				refreshPage(next, current);
+			} else {
+				reloadPage(next);
 			}
 			if (flag) {
 				showTip();
@@ -572,12 +626,12 @@ $(function() {
 
 	init();
 });
-wx.config({
-    debug: true, 
-    appId: '', 
-    timestamp: , 
-    nonceStr: '', 
-    signature: '',
-    jsApiList: []
-});
 
+// wx.config({
+// 	debug: true,
+// 	appId: '',
+// 	timestamp: ,
+// 	nonceStr: '',
+// 	signature: '',
+// 	jsApiList: []
+// });
