@@ -8,6 +8,8 @@
 		<link rel="stylesheet" href="../css/jquery.datetimepicker.css">
 		<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.datetimepicker.js"></script>
+		<script type="text/javascript" src="../js/velocity.min.js"></script>
+		<script type="text/javascript" src="../components/async/lib/async.js"></script>
 		<script type="text/javascript" src="../js/jweixin-1.0.0.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
 	</head>
@@ -67,7 +69,18 @@
 			</div>
 			<div class="page film">
 				<div class="audio mute surface"></div>
-				<div class="sharewrapper"><textarea class="share surface" placeholder="我想对爸妈说的话..."></textarea></div>
+				<p class='guide'>
+					<span class='first'>爸妈越来越老，</span>
+					<br>
+					<span class='second'>能陪他们做的事情越来越少， 趁岁月静好</span>
+					<br>
+					<span class='third'>陪他们回忆青春，再进一次电影院。</span>
+				</p>
+				<div class="sharewrapper">
+					<div class="wrapper">
+						<textarea class="share surface" placeholder="我想对爸妈说的话..."></textarea>
+					</div>
+				</div>
 				<div><img src="../img/cinima.png" alt="" class="cinima full"></div>
 				<div><img src="../img/film_ticket.png" alt="" class="film_ticket full hide"></div>
 				<div class="link">
