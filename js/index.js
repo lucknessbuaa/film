@@ -340,6 +340,7 @@ $(function() {
 
 	function refreshTip(event) {
 		var $el = $(event.target);
+		$el.removeClass('focus');
 		if ($el.val().trim() == '') {
 			$el.addClass('tip');
 		} else {
@@ -428,15 +429,19 @@ $(function() {
 			}, 1700);
 
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence00').addClass('bubbleL').show();
 			}, 2000);
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence01').addClass('bubbleL').show();
 			}, 2200);
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence02').addClass('bubbleL').show();
 			}, 2300);
 			setTimeout(function() {
+				if (!$('.current').hasClass('result')) return;
 				$('.sentence03').addClass('bubbleR').show();
 				resultFinished = 1;
 			}, 2500);
@@ -486,7 +491,7 @@ $(function() {
 					bottom: '20%',
 					opacity: 1
 				}, {
-					duration: 500,
+					duration: 800,
 					easing: 'ease-out',
 					complete: function() {
 						callback(null);
@@ -498,9 +503,9 @@ $(function() {
 					top: '5px',
 					opacity: 1,
 				}, {
-					delay: 500,
+					delay: 600,
 					easing: 'ease-out',
-					duration: 'fast',
+					duration: 800,
 					complete: function() {
 						console.log('first complete');
 						callback(null);
@@ -512,9 +517,9 @@ $(function() {
 					top: '30px',
 					opacity: 1
 				}, {
-					duration: 'fast',
+					duration: 800,
 					easing: 'ease-out',
-					delay: 1000,
+					delay: 1200,
 					complete: function() {
 						console.log('second complete');
 						callback(null);
@@ -526,7 +531,7 @@ $(function() {
 					top: '55px',
 					opacity: 1
 				}, {
-					duration: 'fast',
+					duration: 500,
 					easing: 'ease-out',
 					delay: 1500,
 					complete: function() {
@@ -549,7 +554,7 @@ $(function() {
 								opacity: 0
 							}, {
 								duration: 500,
-								delay: 500,
+								delay: 1000,
 								easing: 'ease-out',
 								complete: function() {
 									$('.guide div').hide();
@@ -563,7 +568,7 @@ $(function() {
 								top: '10px'
 							}, {
 								duration: 500,
-								delay: 500,
+								delay: 1500,
 								easing: 'ease-out',
 								complete: function() {
 									callback(null);
@@ -574,7 +579,7 @@ $(function() {
 							setTimeout(function() {
 								$('.film img.film_ticket').addClass('sliplb').show();
 								callback(null);
-							}, 700);
+							}, 2000);
 						}
 					], function() {
 						console.log('page4 done');
@@ -724,6 +729,7 @@ $(function() {
 		if ($target.hasClass('time')) {
 			$('.xdsoft_datetimepicker').hide();
 			march($target, ['focus', 'blur']);
+			$target.removeClass('tip').addClass('focus');
 		} else if ($('.current').hasClass('long')) {
 			march($target, ['focus', 'mousedown', 'mouseup', 'click']);
 			return true;
@@ -736,6 +742,7 @@ $(function() {
 	function onTouchStart(event) {
 		debug('start');
 		$('.xdsoft_datetimepicker').hide();
+		$('.focus').removeClass('focus');
 		event.preventDefault();
 		if (!started) {
 			startY = getCurY(event);
