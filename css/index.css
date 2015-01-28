@@ -2,6 +2,12 @@
     font-family: modifiedFont;
     src: url('../font/m.ttf');
 }
+
+@font-face {
+    font-family: nodifiedFont;
+    src: url('../font/n.ttf');
+}
+
 @-webkit-keyframes slipin {
 	from {
 		opacity: 0;
@@ -197,7 +203,8 @@
     0%  {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
-@-webkit-keyframes 'opacityLight' {
+
+@-webkit-keyframes opacityLight {
     from {
         opacity: 0.8;
         margin-bottom: -5px;
@@ -211,6 +218,7 @@
         margin-bottom: -5px;
     }
 }
+
 html, body {
 	margin: 0;
 	padding: 0;
@@ -218,7 +226,7 @@ html, body {
 	overflow: hidden;
 	color: white;
 	background: #E15253;
-	font-family: modifiedFont;
+	font-family: modifiedFont, Helvetica, sans-serif;
 	touch-action: none;
 	-ms-touch-action: none;
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
@@ -471,7 +479,7 @@ div.info.above-remain {
 }
 .film textarea {
 	resize: none;
-	font-family: inherit;
+	font-family: nodifiedFont, sans-serif;
 	color: #bf3a3b;
 	display: block;
 	background: transparent;
