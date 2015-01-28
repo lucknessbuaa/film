@@ -179,11 +179,11 @@ $(function(){
 	}
 
 	function loadHoliday() {
-		setTimeout(function() {$('img.title').addClass('slipin').show();}, 500);
-		setTimeout(function() {$('.endinput').addClass('slipin').show();}, 1000);
-		setTimeout(function() {$('.statistic').addClass('slipin').show();}, 1500);
-		setTimeout(function() {$('.people').addClass('slipup').show();}, 2000);
-		setTimeout(function() {$('.ticket').addClass('sliplb').show();}, 2500);
+		setTimeout(function() {$('img.title').addClass('blurin').show();}, 100);
+		setTimeout(function() {$('.endinput').addClass('slipin').show();}, 300);
+		setTimeout(function() {$('.statistic').addClass('slipin').show();}, 800);
+		setTimeout(function() {$('.people').addClass('slipup').show();}, 1300);
+		setTimeout(function() {$('.ticket').addClass('sliplb').show();}, 1800);
 	}
 
 	function loadResult() {

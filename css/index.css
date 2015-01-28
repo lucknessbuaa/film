@@ -46,24 +46,24 @@
 	from {
 		opacity: 0;
 		margin-left: 10%;
-		margin-top: -10%;
+		margin-bottom: 10%;
 	}
 	to {
 		opacity: 1;
 		margin-left: 0;
-		margin-top: 0;
+		margin-bottom: 0;
 	}
 }
 @keyframes sliplb {
 	from {
 		opacity: 0;
 		margin-left: 10%;
-		margin-top: -10%;
+		margin-bottom: 10%;
 	}
 	to {
 		opacity: 1;
 		margin-left: 0;
-		margin-top: 0;
+		margin-bottom: 0;
 	}
 }
 @-webkit-keyframes fadein {
@@ -256,6 +256,9 @@ img.full {
 img.people {
 	bottom: 0;
 }
+img.ticket {
+	bottom: 5%;
+}
 img.children {
 	left: 0;
 }
@@ -270,28 +273,28 @@ img.film_ticket {
 	bottom: 20%;
 }
 .slipin {
-	-webkit-animation: slipin 0.5s ease;
-	animation: slipin 0.5s ease;
+	-webkit-animation: slipin 0.7s ease;
+	animation: slipin 0.7s ease;
 }
 .blurin {
-	-webkit-animation: blurin 0.5s ease;
-	animation: blurin 0.5s ease;
+	-webkit-animation: blurin 0.7s ease;
+	animation: blurin 0.7s ease;
 }
 .fadein {
-	-webkit-animation: fadein 0.5s ease;
-	animation: fadein 0.5s ease;
+	-webkit-animation: fadein 0.7s ease;
+	animation: fadein 0.7s ease;
 }
 .fadeup {
-	-webkit-animation: fadeup 0.5s ease;
-	animation: fadeup 0.5s ease;
+	-webkit-animation: fadeup 0.7s ease;
+	animation: fadeup 0.7s ease;
 }
 .slipup {
-	-webkit-animation: slipup 0.5s ease;
-	animation: slipup 0.5s ease;
+	-webkit-animation: slipup 0.7s ease;
+	animation: slipup 0.7s ease;
 }
 .sliplb {
-	-webkit-animation: sliplb 0.5s ease;
-	animation: sliplb 0.5s ease;
+	-webkit-animation: sliplb 0.7s ease;
+	animation: sliplb 0.7s ease;
 }
 div.startend {
 	margin-top: 30%;
